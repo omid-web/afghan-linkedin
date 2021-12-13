@@ -1,0 +1,60 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowJs": true,
+        "skipLibCheck": true,
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@components/*": [
+                "./src/components/*"
+            ],
+            "@pages/*": [
+                "./src/pages/*"
+            ],
+            "@/*": [
+                "./src/*"
+            ],
+            "@store/*": [
+                "./src/store/*"
+            ],
+            "@layouts/*": [
+                "./src/layouts/*"
+            ],
+            "@services/*": [
+                "./src/services/*"
+            ],
+            "@composables/*": [
+                "./src/composables/*"
+            ]
+        }
+    },
+    "include": [
+        "*.d.ts",
+        "vite.config.ts",
+        ".eslintrc.js",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
