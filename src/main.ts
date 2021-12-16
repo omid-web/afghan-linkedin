@@ -7,6 +7,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { setupLayouts } from 'virtual:generated-layouts';
 import generatedRoutes from 'virtual:generated-pages';
 
+// State Management
+import store from './store/index';
+
 // Base Component
 import App from './App.vue';
 
@@ -20,6 +23,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// Add state management
+app.use(store);
 
 // Add the router to app
 app.use(router);
