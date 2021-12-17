@@ -1,16 +1,22 @@
 <script lang="ts">
+import authStore from '@store/auth';
+
 export default {
   name: 'register-page',
   data() {
     return {
-      name: '',
+      displayName: '',
       email: '',
       password: '',
     };
   },
   methods: {
     register() {
-      console.log('%cHelloWorld.vue line:11 email', 'color: #007acc;', this.email);
+      authStore.dispatch('register', {
+        displayName: this.displayName,
+        email: this.email,
+        password: this.password,
+      });
     },
   },
 };

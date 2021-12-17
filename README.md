@@ -2,9 +2,7 @@
 
 ## About this project
 
-I just wanted to create my own opinionated Vue project template. So i started from scratch, all the history is on this very same repo, mistakes and all.
-
-Works best with Visual Studio Code, it has some rules set up on the same project. Eventually i will add some recommended plugins.
+A vue 3 template, optimized for firebase development
 
 ## Setup
 
@@ -76,7 +74,7 @@ firebase deploy
 - Support for 404 handler out of the box.
 - Named route support for components with the SFC `<route>` tag.
 - Layouts support.
-- State Management via Pinia 🍍
+- State Management via Vuex
 - Component Auto Import
 - Naive UI as UI Framework
 - Auto Import & Automatic Tree Shaking - No more `import ref from 'vue'`!!!!
@@ -158,9 +156,9 @@ meta:
 
 ### State management
 
-Achieved using [`pinia`](https://pinia.esm.dev/)
+Achieved using [`vuex`](https://next.vuex.vuejs.org/) [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate)
 
-The `src/store/demo.ts` file has a fully working demo store. And the `App.vue` file uses this store.
+
 
 ### Persisted state
 
@@ -175,8 +173,8 @@ For persisted state, you need to declare the value of the persisted state in you
 - [ ] Husky Pre-Commit
 - [x] Import Aliases
 - [x] Layouts Support
-- [ ] State Management
-  - [ ] Persisted State
+- [x] State Management
+  - [x] Persisted State
 - [ ] PWA support
 - [ ] Firebase
   - [ ] Auth

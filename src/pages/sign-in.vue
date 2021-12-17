@@ -1,4 +1,6 @@
 <script lang="ts">
+import authStore from '@/store/auth';
+
 export default {
   name: 'sign-in',
   data() {
@@ -9,7 +11,10 @@ export default {
   },
   methods: {
     signIn() {
-      console.log('%cHelloWorld.vue line:11 email', 'color: #007acc;', this.email);
+      authStore.dispatch('login', {
+        email: this.email,
+        password: this.password
+      });
     },
   },
 };
