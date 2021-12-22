@@ -1,23 +1,15 @@
-<script lang="ts">
-import authStore from '@/store/auth';
+<script setup lang="ts">
+import authStore from '@store/auth';
 
-export default {
-  name: 'sign-in',
-  data() {
-    return {
-      email: '',
-      password: '',
-    };
-  },
-  methods: {
-    signIn() {
-      authStore.dispatch('login', {
-        email: this.email,
-        password: this.password
-      });
-    },
-  },
-};
+const email = '';
+const password = '';
+
+function signIn() {
+  authStore.dispatch('login', {
+    email,
+    password,
+  });
+}
 </script>
 
 <template>
@@ -81,4 +73,6 @@ export default {
 
 <route lang="yaml">
 name: 'sign-in'
+meta:
+  layout: 'unauthenticated'
 </route>

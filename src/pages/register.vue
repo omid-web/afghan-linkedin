@@ -1,25 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 import authStore from '@store/auth';
 
-export default {
-  name: 'register-page',
-  data() {
-    return {
-      displayName: '',
-      email: '',
-      password: '',
-    };
-  },
-  methods: {
-    register() {
-      authStore.dispatch('register', {
-        displayName: this.displayName,
-        email: this.email,
-        password: this.password,
-      });
-    },
-  },
-};
+const displayName = '';
+const email = '';
+const password = '';
+
+function register() {
+  authStore.dispatch('register', {
+    displayName,
+    email,
+    password,
+  });
+}
 </script>
 
 <template>
@@ -74,4 +66,6 @@ export default {
 
 <route lang="yaml">
 name: 'register'
+meta:
+  layout: 'unauthenticated'
 </route>

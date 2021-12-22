@@ -10,7 +10,9 @@
       </div>
       <h2 class="mt-8 uppercase text-xl lg:text-5xl font-black">We are sorry, Page not found!</h2>
       <p class="mt-6 uppercase text-sm lg:text-base text-gray-900">The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-      <router-link to="/" class="mt-6 bg-green-500 hover:bg-green-700 text-white font-medium py-4 px-6 rounded-full inline-block uppercase shadow-md">Back to Home Page</router-link>
+      <router-link to="/" class="mt-6 bg-green-500 hover:bg-green-700 text-white font-medium py-4 px-6 rounded-full inline-block uppercase shadow-md">
+        Back to Home Page
+      </router-link>
     </div>
   </section>
 </div>

@@ -20,7 +20,7 @@ type AuthState = {
 
 const auth = getAuth(firebaseInstance);
 
-export default createStore({
+const authStore = createStore({
   state: () => {
     const state: AuthState = {
       user: null,
@@ -67,6 +67,7 @@ export default createStore({
       })
     },
     async login({ commit }, { email, password }) {
+      console.log('%cauth.ts line:70 email', 'color: #007acc;', email);
       await signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         if (res.user) {
@@ -90,3 +91,5 @@ export default createStore({
   modules: {},
   plugins: [createPersistedState()],
 });
+
+export default authStore;

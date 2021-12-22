@@ -1,17 +1,17 @@
 <template>
 <NavComponent />
-<h1>AUTHENTICATED</h1>
+<h1>todos</h1>
 <router-view />
 </template>
 
 <script lang="ts" setup>
 import useGuard from '@composables/auth/guards';
 
-useGuard(false, 'home-page');
+useGuard(true, 'sign-in');
 </script>
 
 <script lang="ts">
 export default {
-  name: 'authenticated-layout',
+  name: 'todos-layout',
 };
 </script>

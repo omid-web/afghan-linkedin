@@ -1,6 +1,6 @@
 <template>
 <NavComponent />
-<h1>AUTHENTICATED</h1>
+<h1>UNAUTHENTICATED</h1>
 <router-view />
 </template>
 
@@ -12,6 +12,6 @@ useGuard(false, 'home-page');
 
 <script lang="ts">
 export default {
-  name: 'authenticated-layout',
+  name: 'unathenticated-layout',
 };
 </script>
