@@ -16,7 +16,7 @@ import firebaseInstance from '@/services/firebase';
 type AuthState = {
   user: null | User;
   email: string;
-  displayName: string;
+  displayName: null | string;
 };
 
 const auth = getAuth(firebaseInstance);
