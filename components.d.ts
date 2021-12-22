@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CountComponent: typeof import('./src/components/CountComponent.vue')['default']
     NavComponent: typeof import('./src/components/NavComponent.vue')['default']
   }
 }

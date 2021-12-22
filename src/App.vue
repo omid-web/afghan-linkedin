@@ -6,12 +6,13 @@ import authStore from '@store/auth';
 authStore.dispatch('init');
 </script>
 
+<template>
+<NavComponent />
+<router-view />
+</template>
+
 <script lang="ts">
 export default {
   name: 'app-base',
 };
 </script>
-
-<template>
-<router-view />
-</template>
