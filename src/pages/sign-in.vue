@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
 
-const email = '';
-const password = '';
+const email = ref(authStore.state.email);
+const password = ref('');
 
 function signIn() {
   authStore.dispatch('login', {
-    email,
-    password,
+    email: email.value,
+    password: password.value,
   });
 }
 </script>
@@ -70,6 +70,12 @@ function signIn() {
   </div>
 </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'sign-in',
+};
+</script>
 
 <route lang="yaml">
 name: 'sign-in'

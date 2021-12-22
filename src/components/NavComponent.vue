@@ -1,15 +1,12 @@
-<script lang="ts">
+<script setup lang="ts">
 import authStore from '@store/auth';
 
-const { logged } = toRefs(authStore.getters);
+const logged = computed(() => authStore.getters.logged);
+const displayName = computed(() => authStore.state.displayName);
 
 function logout() {
   authStore.dispatch('logout');
 }
-
-watch(logged.value, (value: Boolean) => {
-  logged.value = value;
-});
 </script>
 
 <template>
@@ -23,7 +20,7 @@ watch(logged.value, (value: Boolean) => {
     <router-link to="register" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</router-link>
   </div>
   <div class="absolute inset-y-0 right-0 flex items-center pr-2" v-if="logged">
-    <div to="register" class="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Name: </div>
+    <div to="register" class="text-gray-300 px-3 py-2 rounded-md text-sm font-medium">Name: {{displayName}}</div>
     <button @click="logout" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Logout</button>
   </div>
 </nav>

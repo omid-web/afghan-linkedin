@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
 
-const displayName = '';
-const email = '';
-const password = '';
+const displayName = ref('');
+const email = ref('');
+const password = ref('');
 
 function register() {
   authStore.dispatch('register', {
-    displayName,
-    email,
-    password,
+    displayName: displayName.value,
+    email: email.value,
+    password: password.value,
   });
 }
 </script>
@@ -63,6 +63,12 @@ function register() {
   </div>
 </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'register-page',
+};
+</script>
 
 <route lang="yaml">
 name: 'register'

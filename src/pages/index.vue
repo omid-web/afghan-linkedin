@@ -15,6 +15,12 @@ const msg = computed(() => store.state.msg);
 </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'home-page',
+};
+</script>
+
 <route lang="yaml">
 name: 'home-page'
 </route>

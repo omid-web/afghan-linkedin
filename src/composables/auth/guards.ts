@@ -14,8 +14,7 @@ const useAuthGuard = (
   shouldBeAuthenticated: boolean,
   namedRoute: string,
 ) => {
-  const logged = ref(authStore.getters.logged)
-  console.log('%cguards.ts line:18 logged', 'color: #007acc;', logged);
+  const logged = computed(() => authStore.getters.logged)
   const { push } = useRouter();
   const checkAuth = (
     authValue: boolean,
@@ -25,8 +24,7 @@ const useAuthGuard = (
     }
   };
 
-  watch(logged.value, () => {
-    console.log('%cguards.ts line:28 user', 'color: #007acc;', logged.value);
+  watch(logged, () => {
     checkAuth(Boolean(logged.value));
   }, {
     immediate: true,

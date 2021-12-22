@@ -15,6 +15,7 @@ import firebaseInstance from '@/services/firebase';
 
 type AuthState = {
   user: null | User;
+  email: string;
   displayName: string;
 };
 
@@ -24,6 +25,7 @@ const authStore = createStore({
   state: () => {
     const state: AuthState = {
       user: null,
+      email: '',
       displayName: '',
     };
     return state;
@@ -51,12 +53,13 @@ const authStore = createStore({
       });
     },
     async register({ commit }, { displayName, email, password }) {
-      this.state.displayName = displayName;
       await createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         const user = res.user;
         if (user) {
           this.state.user = user;
+          this.state.email = email;
+          this.state.displayName = displayName;
           updateProfile(user, {
             displayName: displayName
           })
@@ -67,11 +70,12 @@ const authStore = createStore({
       })
     },
     async login({ commit }, { email, password }) {
-      console.log('%cauth.ts line:70 email', 'color: #007acc;', email);
       await signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         if (res.user) {
           this.state.user = res.user;
+          this.state.email = email;
+          this.state.displayName = res.user.displayName;
         } else {
           this.state.user = null;
         }

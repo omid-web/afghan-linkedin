@@ -15,6 +15,12 @@ const user = authStore.getters.geUser;
 </div>
 </template>
 
+<script lang="ts">
+export default {
+  name: 'todo-page',
+};
+</script>
+
 <route lang="yaml">
 name: 'todo'
 meta:
