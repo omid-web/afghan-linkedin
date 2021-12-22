@@ -1,5 +1,5 @@
-// import authStore from '@store/auth';
+import authStore from '@store/auth';
 
-// export default () => {
-//   authStore.dispatch('init');
-// }
+export default () => {
+  authStore.dispatch('init');
+}
