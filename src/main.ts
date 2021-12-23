@@ -8,7 +8,7 @@ import { setupLayouts } from 'virtual:generated-layouts';
 import generatedRoutes from 'virtual:generated-pages';
 
 // State Management
-import store from './store/index';
+import store from './store/fire';
 
 // Base Component
 import App from './App.vue';

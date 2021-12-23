@@ -2,7 +2,7 @@
 import authStore from '@store/auth';
 
 const logged = computed(() => authStore.getters.logged);
-const displayName = computed(() => authStore.state.displayName);
+const displayName = computed(() => authStore.state.user?.displayName);
 
 function logout() {
   authStore.dispatch('logout');

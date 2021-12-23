@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import store from '@store/index';
+import fireStore from '@store/fire';
 
-const msg = computed(() => store.state.msg);
+const msg = computed(() => fireStore.state.msg);
 </script>
 
 <template>

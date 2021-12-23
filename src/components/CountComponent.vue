@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import store from '@store/index';
+import fireStore from '@store/fire';
 
-const count = computed(() => store.state.count);
+const count = computed(() => fireStore.state.count);
 
 function increment() {
-  store.commit('increment');
+  fireStore.commit('increment');
 }
 
 function decrement() {
-  store.commit('decrement');
+  fireStore.commit('decrement');
+}
+
+function setCount() {
+  fireStore.dispatch('setCount', count.value);
 }
 </script>
 
@@ -18,4 +22,5 @@ function decrement() {
   {{count}}
   <button @click="increment">+</button>
 </p>
+<button @click="setCount">Set count</button>
 </template>

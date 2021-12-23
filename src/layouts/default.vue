@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useGuard from '@composables/auth/guards';
 
-useGuard(false, 'todo');
+// useGuard(true, 'todo');
 </script>
 
 <template>

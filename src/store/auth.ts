@@ -11,22 +11,18 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
-import firebaseInstance from '@/services/firebase';
+import { auth } from '@/services/firebase';
+import fireStore from '@store/fire';
 
 type AuthState = {
   user: null | User;
-  email: string;
-  displayName: null | string;
 };
 
-const auth = getAuth(firebaseInstance);
 
 const authStore = createStore({
   state: () => {
     const state: AuthState = {
       user: null,
-      email: '',
-      displayName: '',
     };
     return state;
   },
@@ -45,6 +41,7 @@ const authStore = createStore({
         onAuthStateChanged(auth, (updatedUser) => {
           if (updatedUser) {
             this.state.user = updatedUser;
+            fireStore.dispatch('getCount');
           } else {
             this.state.user = null;
             resolve(null);
@@ -58,10 +55,10 @@ const authStore = createStore({
         const user = res.user;
         if (user) {
           this.state.user = user;
-          this.state.email = email;
-          this.state.displayName = displayName;
           updateProfile(user, {
             displayName: displayName
+          }).then(() => {
+            fireStore.dispatch('registerUser', user)
           })
         }
       })
@@ -74,11 +71,10 @@ const authStore = createStore({
       .then((res) => {
         if (res.user) {
           this.state.user = res.user;
-          this.state.email = email;
-          this.state.displayName = res.user.displayName;
         } else {
           this.state.user = null;
         }
+        fireStore.dispatch('setUser', res.user)
       })
       .catch((err) => {
         alert(err.message)
