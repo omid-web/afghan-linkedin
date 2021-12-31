@@ -5,12 +5,12 @@ useGuard(true, 'sign-in');
 </script>
 
 <template>
-<h1>todos</h1>
+<h1>connects</h1>
 <router-view />
 </template>
 
 <script lang="ts">
 export default {
-  name: 'todos-layout',
+  name: 'connects-layout',
 };
 </script>

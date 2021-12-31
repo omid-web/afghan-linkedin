@@ -21,7 +21,6 @@ type AuthState = {
   loading: boolean;
 };
 
-
 const authStore = createStore({
   state: () => {
     const state: AuthState = {
@@ -92,11 +91,6 @@ const authStore = createStore({
       } finally {
         this.state.loading = false;
       }
-    },
-    async connectLinkedin() {
-      window.open(
-        "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78y05l65holsi9&redirect_uri=http://localhost:3000/todo&scope=r_liteprofile%20r_emailaddress%20w_member_social", "_self"
-      );
     },
     async logout() {
       await signOut(auth)

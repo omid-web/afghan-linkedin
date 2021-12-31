@@ -10,6 +10,9 @@ const msg = computed(() => fireStore.state.msg);
     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
       Home
     </h2>
+
+    <UserCardComponent />
+
   </div>
 </div>
 </template>
