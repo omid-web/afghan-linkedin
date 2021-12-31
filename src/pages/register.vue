@@ -60,6 +60,8 @@ function register() {
         </button>
       </div>
     </form>
+
+    <SignInComponent title="Sign up with Google"/>
   </div>
 </div>
 </template>

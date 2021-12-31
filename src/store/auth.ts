@@ -2,20 +2,23 @@ import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import {
   getAuth,
-  signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithRedirect,
   onAuthStateChanged,
   signOut,
   User,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  getRedirectResult
 } from 'firebase/auth';
 import { auth } from '@/services/firebase';
 import fireStore from '@store/fire';
 
 type AuthState = {
   user: null | User;
+  loading: boolean;
 };
 
 
@@ -23,6 +26,7 @@ const authStore = createStore({
   state: () => {
     const state: AuthState = {
       user: null,
+      loading: false
     };
     return state;
   },
@@ -74,18 +78,34 @@ const authStore = createStore({
         } else {
           this.state.user = null;
         }
-        fireStore.dispatch('setUser', res.user)
+        fireStore.dispatch('setUser', res.user);
       })
       .catch((err) => {
-        alert(err.message)
+        alert(err.code + err.message);
       })
     },
-    async loginWithPopup() {
+    async signInWithGoogle() {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      try {
+        this.state.loading = true;
+        await signInWithRedirect(auth, provider);
+      } finally {
+        this.state.loading = false;
+      }
+    },
+    async connectLinkedin() {
+      window.open(
+        "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78y05l65holsi9&redirect_uri=http://localhost:3000/todo&scope=r_liteprofile%20r_emailaddress%20w_member_social", "_self"
+      );
     },
     async logout() {
-      await signOut(auth);
+      await signOut(auth)
+      .then(() => {
+        alert('sign out successful');
+      })
+      .catch((err) => {
+        alert(err.code + err.message);
+      });
     },
   },
   modules: {},

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
 
-const email = ref(authStore.state.email);
+const email = ref(authStore.state.user?.email);
 const password = ref('');
 
 function signIn() {
@@ -38,7 +38,7 @@ function signIn() {
         </div>
       </div>
 
-      <div class="flex items-center justify-between">
+      <!-- <div class="flex items-center justify-between">
         <div class="flex items-center">
           <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
           <label for="remember-me" class="ml-2 block text-sm text-gray-900">
@@ -51,7 +51,7 @@ function signIn() {
             Forgot your password?
           </a>
         </div>
-      </div>
+      </div> -->
 
       <div>
         <button type="submit" 
@@ -67,6 +67,8 @@ function signIn() {
         </button>
       </div>
     </form>
+
+    <SignInComponent title="Sign in with Google"/>
   </div>
 </div>
 </template>
