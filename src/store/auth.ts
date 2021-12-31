@@ -43,8 +43,9 @@ const authStore = createStore({
       return new Promise((resolve) => {
         onAuthStateChanged(auth, (updatedUser) => {
           if (updatedUser) {
+            console.log('%cauth.ts line:46 updatedUser', 'color: #007acc;', updatedUser);
+            fireStore.dispatch('setUser', updatedUser);
             this.state.user = updatedUser;
-            fireStore.dispatch('getCount');
           } else {
             this.state.user = null;
             resolve(null);
@@ -77,7 +78,6 @@ const authStore = createStore({
         } else {
           this.state.user = null;
         }
-        fireStore.dispatch('setUser', res.user);
       })
       .catch((err) => {
         alert(err.code + err.message);
@@ -87,7 +87,7 @@ const authStore = createStore({
       const provider = new GoogleAuthProvider();
       try {
         this.state.loading = true;
-        await signInWithRedirect(auth, provider);
+        await signInWithRedirect(auth, provider)
       } finally {
         this.state.loading = false;
       }

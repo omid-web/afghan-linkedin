@@ -40,7 +40,9 @@
     "vite-aliases": "^0.8.7",
     "vite-plugin-pages": "^0.19.2",
     "vite-plugin-vue-layouts": "^0.5.0",
-    "vue-tsc": "^0.29.8"
+    "vue-tsc": "^0.29.8",
+    "@headlessui/vue": "^1.4.2",
+    "@heroicons/vue": "^1.0.5"
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --cache"
