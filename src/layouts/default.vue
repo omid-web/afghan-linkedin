@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import useGuard from '@composables/auth/guards';
 
-// useGuard(true, 'connect');
+// useGuard(true, 'chat');
 </script>
 
 <template>
-<h1>AUTHENTICATED</h1>
+<!-- <h1>AUTHENTICATED</h1> -->
 <router-view />
 </template>
 

@@ -5,12 +5,12 @@ useGuard(true, 'sign-in');
 </script>
 
 <template>
-<h1>connects</h1>
+<!-- <h1>chats</h1> -->
 <router-view />
 </template>
 
 <script lang="ts">
 export default {
-  name: 'connects-layout',
+  name: 'chats-layout',
 };
 </script>

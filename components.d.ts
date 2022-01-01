@@ -4,7 +4,10 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ChatComponent: typeof import('./src/components/ChatComponent.vue')['default']
+    MessageComponent: typeof import('./src/components/MessageComponent.vue')['default']
     NavComponent: typeof import('./src/components/NavComponent.vue')['default']
+    SendIconComponent: typeof import('./src/components/SendIconComponent.vue')['default']
     SignInComponent: typeof import('./src/components/SignInComponent.vue')['default']
     UserCardComponent: typeof import('./src/components/UserCardComponent.vue')['default']
   }

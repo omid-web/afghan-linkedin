@@ -5,8 +5,9 @@ import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
-  { name: 'Connect', href: 'connect', current: false },
+  { name: 'Chat', href: 'chat', current: false },
 ];
+const item = { name: 'Home', href: '/', current: false };
 
 const logged = computed(() => authStore.getters.logged);
 const photoURL = computed(() => authStore.state.user?.photoURL);
@@ -31,8 +32,7 @@ function logout() {
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
-            <img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
-            <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow" />
+            <img class="block h-8 w-auto" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/AF.svg" alt="Workflow" />
           </div>
           <div v-if="logged" class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
@@ -41,11 +41,21 @@ function logout() {
                 :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
             </div>
           </div>
+          <div v-if="!logged" class="hidden sm:block sm:ml-6">
+            <div class="flex space-x-4">
+              <a :key="item.name" :href="item.href" 
+                :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']" 
+                :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="!logged" class="sm:hidden absolute inset-y-0 left-0 flex items-center pr-2">
+          <router-link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</router-link>
         </div>
 
         <div v-if="!logged" class="absolute inset-y-0 right-0 flex items-center pr-2">
           <router-link to="sign-in" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</router-link>
-          <router-link to="register" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</router-link>
         </div>
 
         <div v-if="logged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

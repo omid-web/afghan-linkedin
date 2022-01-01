@@ -67,7 +67,7 @@ const authStore = createStore({
         }
       })
       .catch((err) => {
-        alert(err.message);
+        alert(err.code + err.message);
       })
     },
     async login({ commit }, { email, password }) {
@@ -94,9 +94,7 @@ const authStore = createStore({
     },
     async logout() {
       await signOut(auth)
-      .then(() => {
-        alert('sign out successful');
-      })
+      .then(() => {})
       .catch((err) => {
         alert(err.code + err.message);
       });

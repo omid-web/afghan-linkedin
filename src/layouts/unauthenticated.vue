@@ -5,7 +5,7 @@ useGuard(false, 'home-page');
 </script>
 
 <template>
-<h1>UNAUTHENTICATED</h1>
+<!-- <h1>UNAUTHENTICATED</h1> -->
 <router-view />
 </template>
 

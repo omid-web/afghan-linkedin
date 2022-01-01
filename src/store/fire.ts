@@ -14,6 +14,7 @@ import {
   where,
   serverTimestamp,
   Timestamp,
+  limit,
 } from 'firebase/firestore';
 import {
   User
@@ -32,7 +33,8 @@ type linkedinUser = {
 type FireState = {
   user: null | User,
   linkedinUser: null | linkedinUser,
-  linkedinUsers: linkedinUser[]
+  linkedinUsers: linkedinUser[],
+  messages: any[]
 };
 
 const fireStore = createStore({
@@ -40,7 +42,8 @@ const fireStore = createStore({
     const state: FireState = {
       user: null,
       linkedinUser: null,
-      linkedinUsers: []
+      linkedinUsers: [],
+      messages: []
     };
     return state;
   },
@@ -68,7 +71,7 @@ const fireStore = createStore({
     async setLinkedin({ commit }, { code }) {
       await axios.post("http://localhost:7220/linkedin-sso-response", {
         code: code,
-        redirectUri: 'http://localhost:3000/connect'
+        redirectUri: 'http://localhost:3000'
       })
       .then(res => {
         const docRef = doc(db, `users`, `${this.state.user?.uid}`)
@@ -112,6 +115,34 @@ const fireStore = createStore({
         linkedinUsers.push(userData);
       }
       this.state.linkedinUsers = linkedinUsers;
+    },
+    async getMessages({ commit }) {
+      const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(10))
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const messages = [];
+        for (const doc of querySnapshot.docs) {
+          const message = {
+            userName: doc.data().userName,
+            userPhotoURL: doc.data().userPhotoURL,
+            userId: doc.data().userId,
+            text: doc.data().text
+          }
+          messages.push(message);
+        }
+        this.state.messages = messages;
+        console.log('%cfire.ts line:132 messages', 'color: #007acc;', messages);
+      })
+    },
+    async sendMessage({ commit }, text) {
+      const { photoURL, uid, displayName } = this.state.user;
+
+      await addDoc(collection(db, "messages"), {
+        userName: displayName,
+        userId: uid,
+        userPhotoURL: photoURL,
+        text: text,
+        createdAt: serverTimestamp()
+      });
     }
   },
   modules: {},

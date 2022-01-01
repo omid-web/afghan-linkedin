@@ -1,14 +1,19 @@
 <script setup lang="ts">
-const message = 'Oops! This is a 404';
+
 </script>
 
 <template>
-<!-- <h1>error layout</h1> -->
-<router-view />
+<ChatComponent />
 </template>
 
 <script lang="ts">
 export default {
-  name: '404-layout',
+  name: 'chat-page',
 };
 </script>
+
+<route lang="yaml">
+name: 'chat'
+meta:
+  layout: 'chats'
+</route>
