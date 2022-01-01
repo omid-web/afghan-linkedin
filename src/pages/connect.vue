@@ -7,8 +7,7 @@ const user = authStore.getters.geUser;
 const url = window.location.href;
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)\=(\S*)/)[1] : '';
 if (code !== '') {
-  // console.log('%cconnect.vue line:10 code', 'color: #007acc;', code);
-  fireStore.commit('setLinkedin', code);
+  fireStore.dispatch('setLinkedin', code);
 }
 
 function connectLinkedin() {

@@ -43,8 +43,8 @@ const authStore = createStore({
       return new Promise((resolve) => {
         onAuthStateChanged(auth, (updatedUser) => {
           if (updatedUser) {
-            console.log('%cauth.ts line:46 updatedUser', 'color: #007acc;', updatedUser);
             fireStore.dispatch('setUser', updatedUser);
+            fireStore.dispatch('getLinkedin');
             this.state.user = updatedUser;
           } else {
             this.state.user = null;
