@@ -16,12 +16,12 @@ function signIn() {
 <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <h2 class="mt-6 text-center text-3xl font-extrabold">
         Sign in to your account
       </h2>
       <h4 class="text-center px-2 pt-4">
         Dont have an account?
-        <router-link to="register" class="underline hover:no-underline hover:text-black">Register</router-link>
+        <router-link to="register" class="underline hover:no-underline hover:text-white">Register</router-link>
       </h4>
     </div>
     <form class="mt-8 space-y-6" @submit.prevent="signIn">

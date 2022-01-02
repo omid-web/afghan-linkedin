@@ -52,7 +52,7 @@ module.exports = {
       { max: 2},
     ],
     "linebreak-style": 0,
-    "max-len": ["error", { "code": 180 }]
+    "max-len": ["error", { "code": 500 }]
   },
   ignorePatterns: ['*.d.ts'],
   overrides: [

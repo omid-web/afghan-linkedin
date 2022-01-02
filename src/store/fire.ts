@@ -1,7 +1,6 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import {
-  getFirestore,
   addDoc,
   collection,
   query,
@@ -11,7 +10,6 @@ import {
   setDoc,
   getDoc,
   getDocs,
-  where,
   serverTimestamp,
   Timestamp,
   limit,
@@ -27,14 +25,15 @@ type linkedinUser = {
   displayName: string,
   email: string,
   profilePic: string,
-  timestamp: Timestamp
+  createdAt: Timestamp
 };
 
 type FireState = {
   user: null | User,
   linkedinUser: null | linkedinUser,
   linkedinUsers: linkedinUser[],
-  messages: any[]
+  messages: any[],
+  ideas: any[]
 };
 
 const fireStore = createStore({
@@ -43,7 +42,8 @@ const fireStore = createStore({
       user: null,
       linkedinUser: null,
       linkedinUsers: [],
-      messages: []
+      messages: [],
+      ideas: []
     };
     return state;
   },
@@ -79,7 +79,7 @@ const fireStore = createStore({
           displayName: res.data.name,
           email: res.data.email,
           profilePic: res.data.profilePic,
-          timestamp: serverTimestamp()
+          createdAt: serverTimestamp()
         });
       }).catch(err => {
         throw err;
@@ -94,7 +94,7 @@ const fireStore = createStore({
           displayName: docSnap.data().displayName,
           email: docSnap.data().email,
           profilePic: docSnap.data().profilePic,
-          timestamp: docSnap.data().timestamp
+          createdAt: docSnap.data().timestamp
         }
         this.state.linkedinUser = userData;
       } else {
@@ -110,14 +110,14 @@ const fireStore = createStore({
           displayName: doc.data().displayName,
           email: doc.data().email,
           profilePic: doc.data().profilePic,
-          timestamp: doc.data().timestamp
+          createdAt: doc.data().timestamp
         }
         linkedinUsers.push(userData);
       }
       this.state.linkedinUsers = linkedinUsers;
     },
     async getMessages({ commit }) {
-      const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(10))
+      const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100))
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const messages = [];
         for (const doc of querySnapshot.docs) {
@@ -129,16 +129,45 @@ const fireStore = createStore({
           }
           messages.push(message);
         }
-        this.state.messages = messages;
-        console.log('%cfire.ts line:132 messages', 'color: #007acc;', messages);
+        this.state.messages = messages.reverse();
       })
     },
     async sendMessage({ commit }, text) {
+      // @ts-ignore
       const { photoURL, uid, displayName } = this.state.user;
 
       await addDoc(collection(db, "messages"), {
         userName: displayName,
         userId: uid,
+        userPhotoURL: photoURL,
+        text: text,
+        createdAt: serverTimestamp()
+      });
+    },
+    async getIdeas({ commit }) {
+      const q = query(collection(db, "ideas"), orderBy("createdAt", "desc"), limit(100))
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const ideas = [];
+        for (const doc of querySnapshot.docs) {
+          const idea = {
+            userName: doc.data().userName,
+            userPhotoURL: doc.data().userPhotoURL,
+            userId: doc.data().userId,
+            text: doc.data().text
+          }
+          ideas.push(idea);
+        }
+        this.state.ideas = ideas;
+      })
+    },
+    async sendIdea({ commit }, text) {
+      // @ts-ignore
+      const { photoURL, uid, displayName, email } = this.state.user;
+
+      await addDoc(collection(db, "ideas"), {
+        userName: displayName,
+        userId: uid,
+        email: email,
         userPhotoURL: photoURL,
         text: text,
         createdAt: serverTimestamp()

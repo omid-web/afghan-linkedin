@@ -6,11 +6,13 @@ import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Chat', href: 'chat', current: false },
+  { name: 'Connect', href: 'connect', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
 
 const logged = computed(() => authStore.getters.logged);
-const photoURL = computed(() => authStore.state.user?.photoURL);
+// @ts-ignore
+const photoURL = computed(() => authStore.state.user.photoURL);
 
 function logout() {
   authStore.dispatch('logout');
@@ -74,7 +76,7 @@ function logout() {
                   <a href="profile" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                  <button @click="logout" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</button>
+                  <a @click="logout" href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -92,3 +94,14 @@ function logout() {
     </DisclosurePanel>
   </Disclosure>
 </template>
+
+<style scoped>
+nav {
+  @apply fixed;
+  @apply w-full;
+  @apply shadow-lg;
+  @apply top-0;
+
+  z-index: 20;
+}
+</style>

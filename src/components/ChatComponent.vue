@@ -4,21 +4,28 @@ import fireStore from '@store/fire';
 
 fireStore.dispatch('getMessages');
 
+const bottom = ref(null);
 const message = ref('');
 const messages = computed(() => fireStore.state.messages);
 const isLogin = computed(() => authStore.getters.logged);
-const user = computed(() => authStore.state.user);
+const user = computed(() => authStore.getters.getUser);
 
-const send = () => {
+const sendMessage = () => {
   fireStore.dispatch('sendMessage', message.value);
   message.value = '';
 };
 
+watch(messages, () => {
+  nextTick(() => {
+    // @ts-ignore
+    bottom.value?.scrollIntoView({ behavior: 'smooth' });
+  });
+}, { deep: true });
 
 </script>
 
 <template>
-  <div class="container-sm">
+  <div class="container-sm mt-20">
     <div class="mx-5">
       <MessageComponent
         v-for="{ text, userPhotoURL, userName, userId } in messages"
@@ -36,7 +43,7 @@ const send = () => {
 
   <div class="bottom">
     <div class="container-sm">
-      <form v-if="isLogin" @submit.prevent="send">
+      <form v-if="isLogin" @submit.prevent=sendMessage>
         <input v-model="message" placeholder="Message" required />
         <button type="submit">
           <svg

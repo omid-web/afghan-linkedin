@@ -9,7 +9,7 @@ useAuth();
 
 <template>
 <NavComponent />
-<router-view />
+<router-view class="mt-20"/>
 </template>
 
 <script lang="ts">
