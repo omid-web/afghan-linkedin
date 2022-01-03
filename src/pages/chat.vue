@@ -14,6 +14,4 @@ export default {
 
 <route lang="yaml">
 name: 'chat'
-meta:
-  layout: 'chats'
 </route>

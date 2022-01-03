@@ -8,15 +8,8 @@ const users = computed(() => fireStore.getters.getLinkedinUsers);
 const user = computed(() => authStore.getters.getUser);
 const logged = computed(() => authStore.getters.logged);
 
-const url = window.location.href;
-// @ts-ignore
-const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)\=(\S*)/)[1] : '';
-if (code !== '') {
-  fireStore.dispatch('setLinkedin', code);
-}
-
 function connectLinkedin() {
-  window.open('https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78y05l65holsi9&redirect_uri=http://localhost:3000&scope=r_liteprofile%20r_emailaddress%20w_member_social', '_self');
+  window.open('https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78y05l65holsi9&redirect_uri=http://localhost:3000/profile&scope=r_liteprofile%20r_emailaddress%20w_member_social', '_self');
 }
 </script>
 

@@ -8,6 +8,7 @@ import {
   onSnapshot,
   doc,
   setDoc,
+  updateDoc,
   getDoc,
   getDocs,
   serverTimestamp,
@@ -24,8 +25,16 @@ import { db } from '@/services/firebase';
 type linkedinUser = {
   displayName: string,
   email: string,
+  jobTitle: string,
+  industry: string,
+  whoCanContact: string,
+  bio: string,
   profilePic: string,
-  createdAt: Timestamp
+  linkedin: string,
+  facebook: string,
+  twitter: string,
+  instagram: string,
+  createdAt: Timestamp,
 };
 
 type FireState = {
@@ -63,27 +72,56 @@ const fireStore = createStore({
   },
   mutations: {
     setUser: (state, user) => state.user = user,
+    setLinkedinUser: (state, linkedinUser) => state.linkedinUser = linkedinUser,
   },
   actions: {
     setUser({ commit }, user) {
       commit('setUser', user);
     },
-    async setLinkedin({ commit }, { code }) {
+    async setLinkedin({ commit }, code) {
+      console.log('%cfire.ts line:81 code', 'color: #007acc;', code);
       await axios.post("http://localhost:7220/linkedin-sso-response", {
         code: code,
-        redirectUri: 'http://localhost:3000'
+        redirectUri: 'http://localhost:3000/profile'
       })
       .then(res => {
+        console.log('%cfire.ts line:86 res', 'color: #007acc;', res);
         const docRef = doc(db, `users`, `${this.state.user?.uid}`)
         setDoc(docRef, {
           displayName: res.data.name,
           email: res.data.email,
+          jobTitle: '',
+          industry: 'none',
+          whoCanContact: '',
+          bio: '',
           profilePic: res.data.profilePic,
-          createdAt: serverTimestamp()
+          linkedin: '',
+          facebook: '',
+          instagram: '',
+          twitter: '',
+          createdAt: serverTimestamp(),
         });
       }).catch(err => {
         throw err;
       });
+    },
+    async updateLinkedin({ commit }, linkedinUser) {
+      const docRef = doc(db, `users`, `${this.state.user?.uid}`)
+      updateDoc(docRef, {
+        displayName: linkedinUser.displayName,
+        email: linkedinUser.email,
+        jobTitle: linkedinUser.jobTitle,
+        industry: linkedinUser.industry,
+        whoCanContact: linkedinUser.whoCanContact,
+        bio: linkedinUser.bio,
+        linkedin: linkedinUser.linkedin,
+        facebook: linkedinUser.facebook,
+        twitter: linkedinUser.twitter,
+        instagram: linkedinUser.instagram,
+        createdAt: serverTimestamp()
+      }).then(() => {
+        commit('setLinkedinUser', linkedinUser);
+      })
     },
     async getLinkedin({ commit }) {
       const docRef = doc(db, `users`, `${this.state.user?.uid}`)
@@ -94,7 +132,15 @@ const fireStore = createStore({
           displayName: docSnap.data().displayName,
           email: docSnap.data().email,
           profilePic: docSnap.data().profilePic,
-          createdAt: docSnap.data().timestamp
+          jobTitle: docSnap.data().jobTitle,
+          industry: docSnap.data().industry,
+          whoCanContact: docSnap.data().whoCanContact,
+          bio: docSnap.data().bio,
+          linkedin: docSnap.data().linkedin,
+          facebook: docSnap.data().facebook,
+          twitter: docSnap.data().twitter,
+          instagram: docSnap.data().instagram,
+          createdAt: docSnap.data().createdAt
         }
         this.state.linkedinUser = userData;
       } else {
@@ -150,10 +196,12 @@ const fireStore = createStore({
         const ideas = [];
         for (const doc of querySnapshot.docs) {
           const idea = {
+            email: doc.data().email,
             userName: doc.data().userName,
             userPhotoURL: doc.data().userPhotoURL,
             userId: doc.data().userId,
-            text: doc.data().text
+            text: doc.data().text,
+            createdAt: doc.data().createdAt.toDate()
           }
           ideas.push(idea);
         }
@@ -165,9 +213,9 @@ const fireStore = createStore({
       const { photoURL, uid, displayName, email } = this.state.user;
 
       await addDoc(collection(db, "ideas"), {
+        email: email,
         userName: displayName,
         userId: uid,
-        email: email,
         userPhotoURL: photoURL,
         text: text,
         createdAt: serverTimestamp()

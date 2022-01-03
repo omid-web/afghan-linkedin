@@ -44,7 +44,6 @@ const authStore = createStore({
         onAuthStateChanged(auth, (updatedUser) => {
           if (updatedUser) {
             fireStore.dispatch('setUser', updatedUser);
-            fireStore.dispatch('getLinkedin');
             this.state.user = updatedUser;
           } else {
             this.state.user = null;
@@ -75,6 +74,7 @@ const authStore = createStore({
       .then((res) => {
         if (res.user) {
           this.state.user = res.user;
+          fireStore.dispatch('getLinkedin');
         } else {
           this.state.user = null;
         }

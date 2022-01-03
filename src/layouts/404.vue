@@ -3,7 +3,6 @@ const message = 'Oops! This is a 404';
 </script>
 
 <template>
-<!-- <h1>error layout</h1> -->
 <router-view />
 </template>
 

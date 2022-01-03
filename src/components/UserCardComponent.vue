@@ -6,13 +6,156 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="md:flex bg-white rounded-lg p-6">
-    <img class="h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6"
-     :src="user?.profilePic">
-    <div class="text-center md:text-left">
-      <h2 class="text-lg">{{ user.displayName }}</h2>
-      <div class="text-purple-500">engineer</div>
-      <div class="text-gray-600">{{ user?.email }}</div>
+  <div class="bg-white rounded-lg p-6 text-gray-700">
+    <div class="flex">
+      <img class="h-20 w-20 rounded mr-4"
+      :src="user?.profilePic">
+      <div class="text-left">
+        <h2 class="text-lg text-gray-900">{{ user.displayName }}</h2>
+        <div>{title}</div>
+        <div>{industry}</div>
+      </div>
+    </div>
+    <div class="py-2">
+      bio
+    </div>
+    <div class="flex">
+      <button class="button">email</button>
+      <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-linkedin"></a>
+      <a href="#" class="fa fa-instagram"></a>
     </div>
   </div>
 </template>
+
+<style scoped>
+.button {
+  border: none;
+  outline: 0;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+}
+
+.fa {
+  padding: 10px;
+  font-size: 20px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-pinterest {
+  background: #cb2027;
+  color: white;
+}
+
+.fa-snapchat-ghost {
+  background: #fffc00;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.fa-skype {
+  background: #00aff0;
+  color: white;
+}
+
+.fa-android {
+  background: #a4c639;
+  color: white;
+}
+
+.fa-dribbble {
+  background: #ea4c89;
+  color: white;
+}
+
+.fa-vimeo {
+  background: #45bbff;
+  color: white;
+}
+
+.fa-tumblr {
+  background: #2c4762;
+  color: white;
+}
+
+.fa-vine {
+  background: #00b489;
+  color: white;
+}
+
+.fa-foursquare {
+  background: #45bbff;
+  color: white;
+}
+
+.fa-stumbleupon {
+  background: #eb4924;
+  color: white;
+}
+
+.fa-flickr {
+  background: #f40083;
+  color: white;
+}
+
+.fa-yahoo {
+  background: #430297;
+  color: white;
+}
+
+.fa-soundcloud {
+  background: #ff5500;
+  color: white;
+}
+
+.fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+.fa-rss {
+  background: #ff6600;
+  color: white;
+}
+</style>

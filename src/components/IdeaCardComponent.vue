@@ -16,7 +16,7 @@ const props = defineProps<{
     </div>
   </div>
   <p class="-mt-4 text-gray-500">
-    {{idea?.text}}
+    {{idea.text}}
   </p>
 </div>
 </template>
