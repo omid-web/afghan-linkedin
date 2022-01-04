@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import authStore from '@store/auth';
-import fireStore from '@/store/fire';
-
 
 </script>
 

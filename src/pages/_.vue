@@ -1,26 +1,27 @@
 <template>
-  <!-- This file lives in public/404.html -->
-<div class="container mx-auto px-4">
-  <section class="py-8 px-4 text-center">
-    <div class="max-w-auto mx-auto">
-      <div class="md:max-w-lg mx-auto">
-        <svg class="fill-current text-gray-300" viewBox="0 0 445 202" xmlns="http://www.w3.org/2000/svg">
-          <path d="M137.587 154.953h-22.102V197h-37.6v-42.047H.53v-33.557L72.36 2.803h43.125V124.9h22.102v30.053zM77.886 124.9V40.537L28.966 124.9h48.92zm116.707-23.718c0 
-          22.46 1.842 39.643 5.525 51.547 3.684 11.905 11.23 17.857 22.64 17.857 11.411 0 18.89-5.952 22.44-17.857 3.548-11.904 5.323-29.086 5.323-51.547 
-          0-23.54-1.775-40.97-5.324-52.29s-11.028-16.98-22.438-16.98c-11.41 0-18.957 5.66-22.64 16.98-3.684 11.32-5.526 28.75-5.526 52.29zM222.759.242c24.887 
-          0 42.339 8.76 52.356 26.28 10.018 17.52 15.027 42.406 15.027 74.66s-5.01 57.095-15.027 74.525c-10.017 17.43-27.47 26.145-52.356 26.145-24.887 
-          0-42.339-8.715-52.357-26.145-10.017-17.43-15.026-42.271-15.026-74.525 0-32.254 5.009-57.14 15.026-74.66C180.42 9.001 197.872.241 222.76.241zm221.824 
-          154.711h-22.102V197h-37.6v-42.047h-77.355v-33.557l71.83-118.593h43.125V124.9h22.102v30.053zM384.882 124.9V40.537l-48.92 84.363h48.92z" fill-rule="nonzero" />
-        </svg>
-      </div>
-      <h2 class="mt-8 uppercase text-xl lg:text-5xl font-black">We are sorry, Page not found!</h2>
-      <p class="mt-6 uppercase text-sm lg:text-base text-gray-900">The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-      <router-link to="/" class="mt-6 bg-green-500 hover:bg-green-700 text-white font-medium py-4 px-6 rounded-full inline-block uppercase shadow-md">
-        Back to Home Page
-      </router-link>
+
+<main class="bg-indigo-900 relative overflow-hidden h-screen">
+    <div class="inset-0 bg-black opacity-25 absolute">
     </div>
-  </section>
-</div>
+    <div class="container mx-auto h-screen md:pt-0 px-6 z-10 flex items-center justify-between">
+        <div class="container mx-auto px-6 flex flex-col-reverse lg:flex-row justify-between items-center relative">
+            <div class="w-full mb-16 md:mb-8 text-center lg:text-left">
+                <h1 class="font-light font-sans text-center lg:text-left text-5xl lg:text-8xl mt-12 md:mt-0 text-white">
+                    Sorry, this page isn&#x27;t available
+                </h1>
+              <div class="pt-8">
+                <a href="#" class="bg-white hover:bg-gray-300 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10">
+                  Go back home
+              </a>
+              </div>
+            </div>
+            <div class="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
+                <img src="src/assets/ruined building.jpeg"/>
+            </div>
+        </div>
+    </div>
+</main>
+
 </template>
 
 <script>
