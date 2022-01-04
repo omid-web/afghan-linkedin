@@ -35,7 +35,7 @@ function logout() {
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
-            <img class="block h-8 w-auto" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/AF.svg" alt="Workflow" />
+            <img class="block h-8 w-auto" src="src/assets/AF.svg" alt="Workflow" />
           </div>
           <div v-if="logged" class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">

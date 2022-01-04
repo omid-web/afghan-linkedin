@@ -24,7 +24,6 @@ const auth = getAuth(firebaseInstance);
 const db = getFirestore(firebaseInstance);
 
 export {
-  firebaseInstance,
   auth,
   db
 };

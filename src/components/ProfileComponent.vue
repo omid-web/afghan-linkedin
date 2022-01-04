@@ -60,17 +60,6 @@ const updateProfile = async () => {
       </h2>
     </div>
 
-    <!-- <button @click="connectLinkedin"
-      class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium 
-      rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-      <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-        </svg>
-      </span>
-      Import your Linkedin info
-    </button> -->
-
     <form class="pb-8 space-y-6" @submit.prevent="updateProfile">
       <div class="rounded-md shadow-sm space-y-3">
         <div>
@@ -123,26 +112,6 @@ const updateProfile = async () => {
       </div>
 
       <div name="socials">
-        <!-- <label for="linkedin">Linkedin profile</label>
-        <input id="linkedin" v-model="linkedin"
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-          rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-
-        <label for="facebook">facebook profile</label>
-        <input id="facebook" v-model="facebook"
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-          rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-
-        <label for="twitter">twitter profile</label>
-        <input id="twitter" v-model="twitter"
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-          rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-
-        <label for="instagram">instagram profile</label>
-        <input id="instagram" v-model="instagram"
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-          rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"> -->
-
         <div>Socials</div>
         <span class="textbox">
           https://www.linkedin.com/in/

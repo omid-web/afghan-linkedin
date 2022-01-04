@@ -18,9 +18,9 @@ import {
 import {
   User
 } from 'firebase/auth';
-import axios from 'axios';
 
 import { db } from '@/services/firebase';
+import linkedinService from '@/services/linkedin';
 
 type linkedinUser = {
   displayName: string,
@@ -79,31 +79,28 @@ const fireStore = createStore({
       commit('setUser', user);
     },
     async setLinkedin({ commit }, code) {
-      console.log('%cfire.ts line:81 code', 'color: #007acc;', code);
-      await axios.post("http://localhost:7220/linkedin-sso-response", {
-        code: code,
-        redirectUri: 'http://localhost:3000/profile'
-      })
-      .then(res => {
-        console.log('%cfire.ts line:86 res', 'color: #007acc;', res);
-        const docRef = doc(db, `users`, `${this.state.user?.uid}`)
-        setDoc(docRef, {
-          displayName: res.data.name,
-          email: res.data.email,
-          jobTitle: '',
-          industry: 'none',
-          whoCanContact: '',
-          bio: '',
-          profilePic: res.data.profilePic,
-          linkedin: '',
-          facebook: '',
-          instagram: '',
-          twitter: '',
-          createdAt: serverTimestamp(),
+      await linkedinService.getLinkedinInfo(code)
+        .then((res: any) => {
+          console.log('%cfire.ts line:86 res', 'color: #007acc;', res);
+          const docRef = doc(db, `users`, `${this.state.user?.uid}`)
+          setDoc(docRef, {
+            displayName: res.data.name,
+            email: res.data.email,
+            jobTitle: '',
+            industry: 'none',
+            whoCanContact: '',
+            bio: '',
+            profilePic: res.data.profilePic,
+            linkedin: '',
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            createdAt: serverTimestamp(),
+          });
+        })
+        .catch((err: any) => {
+          throw err;
         });
-      }).catch(err => {
-        throw err;
-      });
     },
     async updateLinkedin({ commit }, linkedinUser) {
       const docRef = doc(db, `users`, `${this.state.user?.uid}`)
@@ -152,6 +149,7 @@ const fireStore = createStore({
       let linkedinUsers: linkedinUser[] = [];
       const querySnapshot = await getDocs(collection(db, "users"));
       for (const doc of querySnapshot.docs) {
+        // @ts-ignore
         const userData: linkedinUser = {
           displayName: doc.data().displayName,
           email: doc.data().email,
