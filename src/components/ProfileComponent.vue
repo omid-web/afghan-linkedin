@@ -6,34 +6,24 @@ const url = window.location.href;
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)\=(\S*)/)[1] : '';
 if (code !== '') {
   fireStore.dispatch('setLinkedin', code);
+} else {
+  fireStore.dispatch('getLinkedin');
 }
 
-const displayName = ref(fireStore.state.linkedinUser?.displayName);
-const email = ref(fireStore.state.linkedinUser?.email);
-const jobTitle = ref(fireStore.state.linkedinUser?.jobTitle);
-const industry = ref(fireStore.state.linkedinUser?.industry);
-const whoCanContact = ref(fireStore.state.linkedinUser?.whoCanContact);
-const bio = ref(fireStore.state.linkedinUser?.bio);
-const linkedin = ref(fireStore.state.linkedinUser?.linkedin);
-const facebook = ref(fireStore.state.linkedinUser?.facebook);
-const twitter = ref(fireStore.state.linkedinUser?.twitter);
-const instagram = ref(fireStore.state.linkedinUser?.instagram);
-
-// const {
-//   displayName,
-//   email,
-//   jobTitle,
-//   industry,
-//   whoCanContact,
-//   bio,
-//   linkedin,
-//   facebook,
-//   twitter,
-//   instagram,
-// } = reactive(fireStore.state.linkedinUser);
+const {
+  displayName,
+  email,
+  jobTitle,
+  industry,
+  whoCanContact,
+  bio,
+  linkedin,
+  facebook,
+  twitter,
+  instagram,
+} = toRefs(fireStore.getters.getLinkedinUser);
 
 const updateProfile = async () => {
-  console.log('%cProfileComponent.vue line:34', 'color: #007acc;', industry.value);
   fireStore.dispatch(
     'updateLinkedin',
     {

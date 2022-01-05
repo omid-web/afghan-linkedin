@@ -73,15 +73,21 @@ const fireStore = createStore({
   mutations: {
     setUser: (state, user) => state.user = user,
     setLinkedinUser: (state, linkedinUser) => state.linkedinUser = linkedinUser,
+    setLinkedinUsers: (state, linkedinUsers) => state.linkedinUsers = linkedinUsers,
+    resetState: (state) => state = {
+      user: null,
+      linkedinUser: null,
+      linkedinUsers: [],
+      messages: [],
+      ideas: []
+    },
   },
   actions: {
-    setUser({ commit }, user) {
-      commit('setUser', user);
-    },
+    setUser: ({ commit }, user) => commit('setUser', user),
+    resetState: ({ commit }) => commit('resetState'),
     async setLinkedin({ commit }, code) {
       await linkedinService.getLinkedinInfo(code)
         .then((res: any) => {
-          console.log('%cfire.ts line:86 res', 'color: #007acc;', res);
           const docRef = doc(db, `users`, `${this.state.user?.uid}`)
           setDoc(docRef, {
             displayName: res.data.name,
@@ -139,10 +145,7 @@ const fireStore = createStore({
           instagram: docSnap.data().instagram,
           createdAt: docSnap.data().createdAt
         }
-        this.state.linkedinUser = userData;
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+        commit('setLinkedinUser', userData)
       }
     },
     async getAllLinkedin({ commit }) {
@@ -158,7 +161,7 @@ const fireStore = createStore({
         }
         linkedinUsers.push(userData);
       }
-      this.state.linkedinUsers = linkedinUsers;
+      commit('setLinkedinUsers', linkedinUsers);
     },
     async getMessages({ commit }) {
       const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100))

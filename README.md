@@ -10,10 +10,13 @@ Main 3 pages:
 
 ## Setup
 
-### `.env`
+Be sure to setup allowed env prefixes in `vite.config.ts`
+
+`.env.development` and `.env.production` are env files used for local dev and build mode respectively by Vite.
 
 Go to your [Firebase Project](https://console.firebase.google.com) and get your config file, then create a `.env` file with the following structure:
 
+### `.env`
 ```bash
 # Firebase Config
 VITE_API_KEY=""
@@ -22,6 +25,8 @@ VITE_PROJECT_ID=""
 VITE_STORAGE_BUCKET=""
 VITE_MESSAGING_SENDER_ID=""
 VITE_APP_ID=""
+# Linkedin Api
+LINKEDIN_CLIENT_ID=""
 ```
 
 ### `.firebaserc`

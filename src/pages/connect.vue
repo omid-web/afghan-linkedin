@@ -2,6 +2,11 @@
 import fireStore from '@store/fire';
 import authStore from '@store/auth';
 
+const {
+  LINKEDIN_CLIENT_ID,
+  LINKEDIN_REDIRECT_URI,
+} = import.meta.env;
+
 fireStore.dispatch('getAllLinkedin');
 
 const users = computed(() => fireStore.getters.getLinkedinUsers);
@@ -9,7 +14,7 @@ const user = computed(() => authStore.getters.getUser);
 const logged = computed(() => authStore.getters.logged);
 
 function connectLinkedin() {
-  window.open('https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78y05l65holsi9&redirect_uri=http://localhost:3000/profile&scope=r_liteprofile%20r_emailaddress%20w_member_social', '_self');
+  window.open(`https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${LINKEDIN_CLIENT_ID?.toString()}&redirect_uri=${LINKEDIN_REDIRECT_URI?.toString()}&scope=r_liteprofile%20r_emailaddress%20w_member_social`, '_self');
 }
 </script>
 

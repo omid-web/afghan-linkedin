@@ -4,12 +4,12 @@ import authStore from '@store/auth';
 const email = ref(authStore.state.user?.email);
 const password = ref('');
 
-function signIn() {
+const signIn = () => {
   authStore.dispatch('login', {
     email: email.value,
     password: password.value,
   });
-}
+};
 </script>
 
 <template>

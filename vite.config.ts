@@ -10,6 +10,7 @@ import { ViteAliases } from 'vite-aliases';
 export default defineConfig({
   envPrefix: [
     'FIREBASE_',
+    'LINKEDIN_',
   ],
   plugins: [
     vue(),

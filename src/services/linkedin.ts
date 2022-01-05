@@ -1,8 +1,11 @@
 import axios from 'axios';
+const {
+  LINKEDIN_BASE_URL,
+  LINKEDIN_REDIRECT_URI
+} = import.meta.env;
 
 const apiClient = axios.create({
-  baseURL: "https://afghan-linkedin-api.herokuapp.com",
-  // baseURL: "http://localhost:7220/",
+  baseURL: LINKEDIN_BASE_URL?.toString(),
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -14,8 +17,7 @@ export default {
   getLinkedinInfo(code: String) {
     return apiClient.post('/linkedin-sso-response', {
       code: code,
-      redirectUri: 'http://localhost:3000/profile',
-      // redirectUri: 'https://fir-ts-todo.web.app/profile',
+      redirectUri: LINKEDIN_REDIRECT_URI?.toString()
     })
   },
 }

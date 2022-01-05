@@ -1,9 +1,7 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 import {
-  getAuth,
   GoogleAuthProvider,
-  FacebookAuthProvider,
   signInWithRedirect,
   onAuthStateChanged,
   signOut,
@@ -11,7 +9,6 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
-  getRedirectResult
 } from 'firebase/auth';
 import { auth } from '@/services/firebase';
 import fireStore from '@store/fire';
@@ -47,6 +44,7 @@ const authStore = createStore({
             this.state.user = updatedUser;
           } else {
             this.state.user = null;
+            fireStore.dispatch("resetState");
             resolve(null);
           };
         });
