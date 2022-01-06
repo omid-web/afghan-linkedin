@@ -11,7 +11,7 @@ const props = defineProps({
     <span v-if="!sender">{{ name }}</span>
     <div class="flex" :class="sender ? 'flex-row-reverse' : ''">
       <img class="mt-1 avatar" :src="photoUrl" />
-      <div class="text w-3/4" :class="sender ? 'bg-green-800' : 'bg-gray-700'">
+      <div class="text w-3/4" :class="sender ? 'bg-green-800' : 'bg-gray-900'">
         <slot />
       </div>
     </div>

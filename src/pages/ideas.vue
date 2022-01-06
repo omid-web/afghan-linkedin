@@ -23,7 +23,7 @@ const sendIdea = () => {
       </h2>
     </div>
     <div className="bg-white p-2 rounded-2xl shadow-md font-medium mt-6">
-      <div className="flex space-x-4 p-4 items-center">
+      <div className="flex space-x-4 p-2 items-center">
         <form className="flex flex-1" @submit.prevent="sendIdea">
           <textarea
             id="idea" name="idea" rows="4" required
@@ -33,7 +33,7 @@ const sendIdea = () => {
             v-model="idea"
           />
           <button type="submit"
-            class="mt-12 px-2 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            class="mt-10 ml-4 px-2 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
             Post idea
           </button>
         </form>

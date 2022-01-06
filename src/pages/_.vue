@@ -1,5 +1,8 @@
-<template>
+<script setup lang="ts">
+import errorUrl from '/ruined-building.jpeg'
+</script>
 
+<template>
 <main class="bg-indigo-900 relative overflow-hidden h-screen">
   <div class="inset-0 bg-black opacity-25 absolute">
   </div>
@@ -16,15 +19,14 @@
         </div>
       </div>
       <div class="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
-        <img src="src/assets/ruined-building.jpeg"/>
+        <img :src=errorUrl />
       </div>
     </div>
   </div>
 </main>
-
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: '404-page',
 };

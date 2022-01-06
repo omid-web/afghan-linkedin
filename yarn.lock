@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@aacassandra/vue3-progressbar@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@aacassandra/vue3-progressbar/-/vue3-progressbar-1.0.3.tgz#12df4a135968a43af2d2a5753174587e5cc5cb95"
+  integrity sha512-e4SlgYwXiNABJbHYOChs3aSiCyR+1D6WAjWR1zo3vCs/9k6Vjj2GIPXWNJA/YP4RhlQS4eSC3RtCPC95CfAEbw==
+  dependencies:
+    core-js "^3.6.5"
+    vue "^3.0.0"
+
 "@antfu/utils@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@antfu/utils/-/utils-0.3.0.tgz#6306c43b52a883bd8e973e3ed8dd64248418bcc4"
@@ -1313,6 +1321,11 @@ core-js@3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
+
+core-js@^3.6.5:
+  version "3.20.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.2.tgz#46468d8601eafc8b266bd2dd6bf9dee622779581"
+  integrity sha512-nuqhq11DcOAbFBV4zCbKeGbKQsUDRqTX0oqx7AttUBuqe3h20ixsE039QHelbL6P4h+9kytVqyEtyZ6gsiwEYw==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -4003,7 +4016,7 @@ vue-tsc@^0.29.8:
     "@volar/shared" "0.29.8"
     vscode-vue-languageservice "0.29.8"
 
-vue@^3.2.25:
+vue@^3.0.0, vue@^3.2.25:
   version "3.2.26"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.26.tgz#5db575583ecae495c7caa5c12fd590dffcbb763e"
   integrity sha512-KD4lULmskL5cCsEkfhERVRIOEDrfEL9CwAsLYpzptOGjaGFNWo3BQ9g8MAb7RaIO71rmVOziZ/uEN/rHwcUIhg==
