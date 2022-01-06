@@ -10,6 +10,7 @@ if (code !== '') {
   fireStore.dispatch('getLinkedin');
 }
 
+const user = reactive(fireStore.getters.getLinkedinUser);
 const {
   displayName,
   email,
@@ -74,9 +75,6 @@ const updateProfile = async () => {
         </div>
         <div>
           <label for="industry">Select an industry</label>
-          <!-- <input id="industry" v-model="industry" type="text"
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-            rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"> -->
           <select id="industry" v-model="industry" name="industry"
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
@@ -85,13 +83,12 @@ const updateProfile = async () => {
           </select>
         </div>
       </div>
-      <div>
+      <!-- <div>
         <label for="whoCanContact">Who should contact you?</label>
         <input id="whoCanContact" v-model="whoCanContact" type="text"
           class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
           rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-      </div>
-
+      </div> -->
       <div>
         <label for="bio">Bio</label>
         <textarea
@@ -102,7 +99,6 @@ const updateProfile = async () => {
           :placeholder="'Tell us about yourself, ' + [[ displayName ]]"
         />
       </div>
-
       <div name="socials">
         <div>Socials</div>
         <span class="textbox">
@@ -126,7 +122,6 @@ const updateProfile = async () => {
             class="text-gray-900"/>
         </span>
       </div>
-
       <div>
         <button type="submit"
           class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium
@@ -136,7 +131,7 @@ const updateProfile = async () => {
       </div>
     </form>
 
-    <UserCardComponent :user="fireStore.getters.getLinkedinUser"/>
+    <UserCardComponent :user="user"/>
 
   </div>
 </template>

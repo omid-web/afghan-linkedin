@@ -6,9 +6,9 @@ fireStore.dispatch('getMessages');
 
 const bottom = ref(null);
 const message = ref('');
-const messages = computed(() => fireStore.state.messages);
-const isLogin = computed(() => authStore.getters.logged);
-const user = computed(() => authStore.getters.getUser);
+const messages = computed(() => fireStore.getters.getMessages);
+const logged = ref(authStore.getters.logged);
+const user = ref(authStore.getters.getUser);
 
 const sendMessage = () => {
   fireStore.dispatch('sendMessage', message.value);
@@ -43,7 +43,7 @@ watch(messages, () => {
 
   <div class="bottom">
     <div class="container-sm">
-      <form v-if="isLogin" @submit.prevent=sendMessage>
+      <form v-if="logged" @submit.prevent=sendMessage>
         <input v-model="message" placeholder="Message" required />
         <button type="submit">
           <svg

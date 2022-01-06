@@ -5,8 +5,8 @@ import authStore from '@store/auth';
 fireStore.dispatch('getIdeas');
 
 const idea = ref('');
-const ideas = computed(() => fireStore.state.ideas);
-const user = computed(() => authStore.getters.getUser);
+const ideas = computed(() => fireStore.getters.getIdeas);
+const user = ref(authStore.getters.getUser);
 
 const sendIdea = () => {
   fireStore.dispatch('sendIdea', idea.value);
