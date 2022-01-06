@@ -7,9 +7,9 @@ const {
   LINKEDIN_REDIRECT_URI,
 } = import.meta.env;
 
-fireStore.dispatch('getAllLinkedin');
+fireStore.dispatch('getAllLinkedinUsers');
 
-const users = computed(() => fireStore.getters.getLinkedinUsers);
+const users = computed(() => fireStore.getters.getAllLinkedinUsers);
 const user = computed(() => authStore.getters.getUser);
 const logged = computed(() => authStore.getters.logged);
 

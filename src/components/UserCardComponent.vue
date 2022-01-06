@@ -3,6 +3,28 @@
 const props = defineProps<{
   user?: any,
 }>();
+
+// const {
+//   displayName,
+//   email,
+//   jobTitle,
+//   industry,
+//   whoCanContact,
+//   bio,
+//   profilePic,
+//   linkedin,
+//   facebook,
+//   twitter,
+//   instagram,
+//   createdAt: Timestamp,
+// } = toRefs(props.user);
+
+const emailLink = 'mailto:' + props.user.email;
+const linkedin = 'https://linkedin.com/in/' + props.user.linkedin;
+const facebook = 'https://facebook.com/' + props.user.facebook;
+const twitter = 'https://twitter.com/' + props.user.instagram;
+const instagram = 'https://instagram.com/' + props.user.instagram;
+
 </script>
 
 <template>
@@ -12,32 +34,38 @@ const props = defineProps<{
       :src="user?.profilePic">
       <div class="text-left">
         <h2 class="text-lg text-gray-900">{{ user.displayName }}</h2>
-        <div>{title}</div>
-        <div>{industry}</div>
+        <div>{{ user.jobTitle }}</div>
+        <div>{{ user.industry }}</div>
       </div>
     </div>
     <div class="py-2">
-      bio
+      {{ user.bio }}
     </div>
     <div class="flex">
-      <button class="button">email</button>
-      <a href="#" class="fa fa-facebook"></a>
-      <a href="#" class="fa fa-twitter"></a>
-      <a href="#" class="fa fa-linkedin"></a>
-      <a href="#" class="fa fa-instagram"></a>
+      <a :href="emailLink" class="email">Email</a>
+      <a :href="linkedin" :class='["fa fa-linkedin", !props.user.linkedin && "opacity-40 pointer-events-none"]' />
+      <a :href="facebook" :class='["fa fa-facebook", !props.user.facebook && "opacity-40 pointer-events-none"]' />
+      <a :href="twitter" :class='["fa fa-twitter", !props.user.twitter && "opacity-40 pointer-events-none"]' />
+      <a :href="instagram" :class='["fa fa-instagram", !props.user.instagram && "opacity-40 pointer-events-none"]' />
     </div>
   </div>
 </template>
 
 <style scoped>
-.button {
-  border: none;
-  outline: 0;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
+.email {
+  padding: 10px;
+  font-size: 20px;
   width: 100px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  background: black;
+  color: white;
+}
+
+.email:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
 }
 
 .fa {
@@ -50,7 +78,8 @@ const props = defineProps<{
 }
 
 .fa:hover {
-    opacity: 0.7;
+  opacity: 0.7;
+  transform: scale(1.1);
 }
 
 .fa-facebook {
@@ -60,11 +89,6 @@ const props = defineProps<{
 
 .fa-twitter {
   background: #55ACEE;
-  color: white;
-}
-
-.fa-google {
-  background: #dd4b39;
   color: white;
 }
 
@@ -83,79 +107,10 @@ const props = defineProps<{
   color: white;
 }
 
-.fa-pinterest {
-  background: #cb2027;
-  color: white;
-}
-
 .fa-snapchat-ghost {
   background: #fffc00;
   color: white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.fa-skype {
-  background: #00aff0;
-  color: white;
-}
-
-.fa-android {
-  background: #a4c639;
-  color: white;
-}
-
-.fa-dribbble {
-  background: #ea4c89;
-  color: white;
-}
-
-.fa-vimeo {
-  background: #45bbff;
-  color: white;
-}
-
-.fa-tumblr {
-  background: #2c4762;
-  color: white;
-}
-
-.fa-vine {
-  background: #00b489;
-  color: white;
-}
-
-.fa-foursquare {
-  background: #45bbff;
-  color: white;
-}
-
-.fa-stumbleupon {
-  background: #eb4924;
-  color: white;
-}
-
-.fa-flickr {
-  background: #f40083;
-  color: white;
-}
-
-.fa-yahoo {
-  background: #430297;
-  color: white;
-}
-
-.fa-soundcloud {
-  background: #ff5500;
-  color: white;
-}
-
-.fa-reddit {
-  background: #ff5700;
-  color: white;
-}
-
-.fa-rss {
-  background: #ff6600;
-  color: white;
-}
 </style>

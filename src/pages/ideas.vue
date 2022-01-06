@@ -26,7 +26,7 @@ const sendIdea = () => {
       <div className="flex space-x-4 p-4 items-center">
         <form className="flex flex-1" @submit.prevent="sendIdea">
           <textarea
-            id="idea" name="idea" rows="4"
+            id="idea" name="idea" rows="4" required
             class="bg-gray-100 text-black flex-grow px-5 focus:outline-none"
             type="text"
             :placeholder="'Share an idea, ' + [[ user.displayName ]]"

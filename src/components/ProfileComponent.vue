@@ -17,6 +17,7 @@ const {
   industry,
   whoCanContact,
   bio,
+  profilePic,
   linkedin,
   facebook,
   twitter,
@@ -33,6 +34,7 @@ const updateProfile = async () => {
       industry: industry.value,
       whoCanContact: whoCanContact.value,
       bio: bio.value,
+      profilePic: profilePic.value,
       linkedin: linkedin.value,
       facebook: facebook.value,
       twitter: twitter.value,
@@ -54,13 +56,13 @@ const updateProfile = async () => {
       <div class="rounded-md shadow-sm space-y-3">
         <div>
           <label for="full-name">Full name</label>
-          <input id="full-name" v-model="displayName" type="text"
+          <input id="full-name" v-model="displayName" type="text" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
         </div>
         <div>
           <label for="email-address">Email address</label>
-          <input id="email-address" v-model="email" type="email" autocomplete="email"
+          <input id="email-address" v-model="email" type="email" autocomplete="email" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
         </div>
@@ -78,7 +80,7 @@ const updateProfile = async () => {
           <select id="industry" v-model="industry" name="industry"
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-            <option value="none" selected disabled hidden>Pick One</option>
+            <option value="" selected disabled hidden>Pick One</option>
             <IndustryOptionsComponent />
           </select>
         </div>
@@ -104,23 +106,23 @@ const updateProfile = async () => {
       <div name="socials">
         <div>Socials</div>
         <span class="textbox">
-          https://www.linkedin.com/in/
-          <input id="linkedin" v-model="linkedin" type="text"
+          https://linkedin.com/in/
+          <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle"
             class="text-gray-900"/>
         </span>
         <span class="textbox">
-          https://www.facebook.com/
-          <input id="facebook" v-model="facebook" type="text"
+          https://facebook.com/
+          <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle"
             class="text-gray-900" />
         </span>
         <span class="textbox">
-          https://www.twitter.com/
-          <input id="facebook" v-model="facebook" type="text"
+          https://twitter.com/
+          <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle"
             class="text-gray-900"/>
         </span>
         <span class="textbox">
-          https://www.instagram.com/
-          <input id="instagram" v-model="instagram" type="text"
+          https://instagram.com/
+          <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle"
             class="text-gray-900"/>
         </span>
       </div>
@@ -133,6 +135,9 @@ const updateProfile = async () => {
         </button>
       </div>
     </form>
+
+    <UserCardComponent :user="fireStore.getters.getLinkedinUser"/>
+
   </div>
 </template>
 
