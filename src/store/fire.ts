@@ -21,29 +21,9 @@ import {
 
 import { db } from '@/services/firebase';
 import linkedinService from '@/services/linkedin';
+import { linkedinUser, FireState } from "@/types";
 
-type linkedinUser = {
-  displayName: string,
-  email: string,
-  jobTitle: string,
-  industry: string,
-  whoCanContact: string,
-  bio: string,
-  profilePic: string,
-  linkedin: string,
-  facebook: string,
-  twitter: string,
-  instagram: string,
-  createdAt: Timestamp,
-};
 
-type FireState = {
-  user: null | User,
-  linkedinUser: null | linkedinUser,
-  linkedinUsers: linkedinUser[],
-  messages: any[],
-  ideas: any[]
-};
 
 const fireStore = createStore({
   state: () => {

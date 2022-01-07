@@ -16,7 +16,7 @@ const item = { name: 'Home', href: '/', current: false };
 
 const logged = computed(() => authStore.getters.logged);
 const photoURL = computed(() => {
-  if (authStore.state.user?.photoURL == null) {
+  if (!('user' in authStore.state) || authStore.state.user?.photoURL === (null || '')) {
     return '';
   }
   return authStore.state.user?.photoURL;

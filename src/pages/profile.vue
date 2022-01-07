@@ -22,7 +22,7 @@ const user = computed(() => fireStore.getters.getLinkedinUser);
         Edit your contact card
       </h2>
       <ProfileComponent :user=user />
-      <UserCardComponent :user=user />
+      <UserCardComponent :user=user class="mb-6"/>
     </div>
 
     <div v-else>

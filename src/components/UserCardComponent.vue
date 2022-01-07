@@ -1,15 +1,29 @@
 <script setup lang="ts">
+import fireStore from '@/store/fire';
 
 const props = defineProps<{
   user?: any,
 }>();
 
-const emailLink = 'mailto:' + props.user.email;
+const loggedUser = fireStore.getters.getLinkedinUser;
 const linkedin = 'https://linkedin.com/in/' + props.user.linkedin;
 const facebook = 'https://facebook.com/' + props.user.facebook;
 const twitter = 'https://twitter.com/' + props.user.twitter;
 const instagram = 'https://instagram.com/' + props.user.instagram;
 
+const emailLink = `
+mailto:${props.user.email}?
+bcc=afghan.tech.bro@gmail.com&
+subject=afghan-linkedin.com%3A%20Let's%20connect%20&
+body=Hi ${props.user.displayName},%0D%0D
+I am interested in collabrating with you. Can we talk?%0D%0D
+Ways to get in touch with me besides replying to this email are:%0D
+${linkedin}%0D
+${facebook}%0D
+${twitter}%0D
+${instagram}%0D
+%0D%0D%0D
+Regards, ${loggedUser.displayName}`;
 </script>
 
 <template>
@@ -27,11 +41,13 @@ const instagram = 'https://instagram.com/' + props.user.instagram;
       {{ user.bio }}
     </div>
     <div class="flex">
-      <a :href="emailLink" class="email">Email</a>
-      <a :href="linkedin" target="_blank" :class='["fa fa-linkedin", !props.user.linkedin && "opacity-40 pointer-events-none"]' />
-      <a :href="facebook" target="_blank" :class='["fa fa-facebook", !props.user.facebook && "opacity-40 pointer-events-none"]' />
-      <a :href="twitter" target="_blank" :class='["fa fa-twitter", !props.user.twitter && "opacity-40 pointer-events-none"]' />
-      <a :href="instagram" target="_blank" :class='["fa fa-instagram", !props.user.instagram && "opacity-40 pointer-events-none"]' />
+      <form :action=emailLink method="post">
+        <button type="submit" class="email">Email</button>
+      </form>
+      <a :href=linkedin target="_blank" :class='["fa fa-linkedin", !props.user.linkedin && "opacity-40 pointer-events-none"]' />
+      <a :href=facebook target="_blank" :class='["fa fa-facebook", !props.user.facebook && "opacity-40 pointer-events-none"]' />
+      <a :href=twitter target="_blank" :class='["fa fa-twitter", !props.user.twitter && "opacity-40 pointer-events-none"]' />
+      <a :href=instagram target="_blank" :class='["fa fa-instagram", !props.user.instagram && "opacity-40 pointer-events-none"]' />
     </div>
   </div>
 </template>

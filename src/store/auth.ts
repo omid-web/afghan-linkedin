@@ -5,18 +5,13 @@ import {
   signInWithRedirect,
   onAuthStateChanged,
   signOut,
-  User,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '@/services/firebase';
 import fireStore from '@store/fire';
-
-type AuthState = {
-  user: null | User;
-  loading: boolean;
-};
+import { AuthState } from '@/types';
 
 const authStore = createStore({
   state: () => {

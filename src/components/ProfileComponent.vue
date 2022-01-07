@@ -88,25 +88,21 @@ const updateProfile = async () => {
   </div>
   <div name="socials">
     <div>Socials</div>
-    <span class="textbox">
+    <span class="flex">
       https://linkedin.com/in/
-      <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle"
-        class="text-gray-900"/>
+      <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle" class="text-gray-900 flex-1" />
     </span>
-    <span class="textbox">
+    <span class="flex">
       https://facebook.com/
-      <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle"
-        class="text-gray-900" />
+      <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle" class="text-gray-900 flex-1" />
     </span>
-    <span class="textbox">
+    <span class="flex">
       https://twitter.com/
-      <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle"
-        class="text-gray-900"/>
+      <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle" class="text-gray-900 flex-1"/>
     </span>
-    <span class="textbox">
+    <span class="flex">
       https://instagram.com/
-      <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle"
-        class="text-gray-900"/>
+      <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle" class="text-gray-900 flex-1"/>
     </span>
   </div>
   <button type="submit"
@@ -118,11 +114,13 @@ const updateProfile = async () => {
 </template>
 
 <style scoped>
-span.textbox {
+span {
   background-color: #FFF;
-  color: #888;
+  color: #777;
   padding:3px;
+  margin-bottom: 4px;
   border:1px #888 solid;
+  display: block;
 }
 
 </style>
