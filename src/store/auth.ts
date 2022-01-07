@@ -12,6 +12,9 @@ import {
 import { auth } from '@/services/firebase';
 import fireStore from '@store/fire';
 import { AuthState } from '@/types';
+import { useLoading } from '@/loading'
+
+const loading = useLoading();
 
 const authStore = createStore({
   state: () => {
@@ -29,23 +32,26 @@ const authStore = createStore({
       return Boolean(state.user);
     },
   },
-  mutations: {},
+  mutations: {
+    setUser: (state, user) => state.user = user,
+  },
   actions: {
-    init() {
+    init({ commit }) {
       return new Promise((resolve) => {
         onAuthStateChanged(auth, (updatedUser) => {
           if (updatedUser) {
             fireStore.dispatch('setUser', updatedUser);
-            this.state.user = updatedUser;
+            commit('setUser', updatedUser);
           } else {
-            this.state.user = null;
             fireStore.dispatch("resetState");
+            commit('setUser', null);
             resolve(null);
           };
         });
       });
     },
     async register({ commit }, { displayName, email, password }) {
+      loading.start();
       await createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         const user = res.user;
@@ -61,8 +67,10 @@ const authStore = createStore({
       .catch((err) => {
         alert(err.code + err.message);
       })
+      loading.end();
     },
     async login({ commit }, { email, password }) {
+      loading.start();
       await signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         if (res.user) {
@@ -75,14 +83,15 @@ const authStore = createStore({
       .catch((err) => {
         alert(err.code + err.message);
       })
+      loading.end();
     },
     async signInWithGoogle() {
       const provider = new GoogleAuthProvider();
       try {
-        this.state.loading = true;
+        loading.start();
         await signInWithRedirect(auth, provider)
       } finally {
-        this.state.loading = false;
+        loading.end();
       }
     },
     async logout() {

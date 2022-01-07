@@ -40,7 +40,7 @@ const sendIdea = () => {
       </div>
     </div>
 
-    <IdeaCardComponent v-for="i in ideas" :idea="i" />
+    <IdeaCardComponent v-for="i in ideas" :idea=i :key=i.text />
 
   </div>
 </div>

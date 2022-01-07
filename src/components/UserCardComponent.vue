@@ -5,11 +5,11 @@ const props = defineProps<{
   user?: any,
 }>();
 
-const loggedUser = fireStore.getters.getLinkedinUser;
-const linkedin = 'https://linkedin.com/in/' + props.user.linkedin;
-const facebook = 'https://facebook.com/' + props.user.facebook;
-const twitter = 'https://twitter.com/' + props.user.twitter;
-const instagram = 'https://instagram.com/' + props.user.instagram;
+const loggedUser = fireStore.getters.getUser;
+const linkedin = `https://linkedin.com/in/${props.user.linkedin}`;
+const facebook = `https://facebook.com/${props.user.facebook}`;
+const twitter = `https://twitter.com/${props.user.twitter}`;
+const instagram = `https://instagram.com/${props.user.instagram}`;
 
 const emailLink = `
 mailto:${props.user.email}?

@@ -22,8 +22,9 @@ import {
 import { db } from '@/services/firebase';
 import linkedinService from '@/services/linkedin';
 import { linkedinUser, FireState } from "@/types";
+import { useLoading } from '@/loading'
 
-
+const loading = useLoading();
 
 const fireStore = createStore({
   state: () => {
@@ -61,6 +62,7 @@ const fireStore = createStore({
     setLinkedinUser: (state, linkedinUser) => state.linkedinUser = linkedinUser,
     setAllLinkedinUsers: (state, linkedinUsers) => state.linkedinUsers = linkedinUsers,
     setMessages: (state, messages) => state.messages = messages,
+    setIdeas: (state, ideas) => state.ideas = ideas,
     resetState: (state) => state = {
       user: null,
       linkedinUser: null,
@@ -96,6 +98,7 @@ const fireStore = createStore({
         });
     },
     async updateLinkedin({ commit }, linkedinUser) {
+      loading.start();
       const docRef = doc(db, `users`, `${this.state.user?.uid}`)
       updateDoc(docRef, {
         displayName: linkedinUser.displayName,
@@ -112,9 +115,11 @@ const fireStore = createStore({
         createdAt: serverTimestamp()
       }).then(() => {
         commit('setLinkedinUser', linkedinUser);
+        loading.end();
       })
     },
     async getLinkedin({ commit }) {
+      loading.start();
       const docRef = doc(db, `users`, `${this.state.user?.uid}`)
       const docSnap = await getDoc(docRef);
 
@@ -133,10 +138,12 @@ const fireStore = createStore({
           instagram: docSnap.data().instagram,
           createdAt: docSnap.data().createdAt,
         }
-        commit('setLinkedinUser', userData)
+        commit('setLinkedinUser', userData);
+        loading.end();
       }
     },
     async getAllLinkedinUsers({ commit }) {
+      loading.start();
       let linkedinUsers: linkedinUser[] = [];
       const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
       const querySnapshot = await getDocs(q);
@@ -159,8 +166,10 @@ const fireStore = createStore({
         linkedinUsers.push(userData);
       }
       commit('setAllLinkedinUsers', linkedinUsers);
+      loading.end();
     },
     async getMessages({ commit }) {
+      loading.start();
       const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100))
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const messages = [];
@@ -174,9 +183,11 @@ const fireStore = createStore({
           messages.push(message);
         }
         commit('setMessages', messages.reverse());
+        loading.end();
       });
     },
     async sendMessage({ commit }, text) {
+      loading.start();
       // @ts-ignore
       const { photoURL, uid, displayName } = this.state.user;
 
@@ -187,8 +198,10 @@ const fireStore = createStore({
         text: text,
         createdAt: serverTimestamp()
       });
+      loading.end();
     },
     async getIdeas({ commit }) {
+      loading.start();
       const q = query(collection(db, "ideas"), orderBy("createdAt", "desc"), limit(100))
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const ideas = [];
@@ -203,10 +216,12 @@ const fireStore = createStore({
           }
           ideas.push(idea);
         }
-        this.state.ideas = ideas;
+        commit('setIdeas', ideas);
+        loading.end();
       })
     },
     async sendIdea({ commit }, text) {
+      loading.start();
       // @ts-ignore
       const { photoURL, uid, displayName, email } = this.state.user;
 
@@ -218,6 +233,7 @@ const fireStore = createStore({
         text: text,
         createdAt: serverTimestamp()
       });
+      loading.end();
     }
   },
   modules: {},

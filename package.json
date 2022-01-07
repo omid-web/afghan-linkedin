@@ -7,9 +7,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aacassandra/vue3-progressbar": "^1.0.3",
     "axios": "^0.24.0",
     "firebase": "^9.6.1",
+    "nprogress": "^0.2.0",
     "vue": "^3.2.25",
     "vue-router": "4",
     "vuex": "^4.0.2",

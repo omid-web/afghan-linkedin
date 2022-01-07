@@ -28,7 +28,7 @@ const filteredUsers = computed(() => {
       </select>
     </div>
 
-    <UserCardComponent v-for="u in filteredUsers" :user="u" />
+    <UserCardComponent v-for="u in filteredUsers" :user=u :key=u.email />
   </div>
 </div>
 </template>
