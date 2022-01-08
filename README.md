@@ -4,7 +4,9 @@
 
 - improve the homepage, more informative and prettier
 - add share buttons to the proffesional and business cards.
-
+- add skeleton to loading pages
+- add notification toast after user adds/edits their information
+- make site behave less janky when loggin for first time
 
 ## About this project
 
