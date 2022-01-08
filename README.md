@@ -2,11 +2,24 @@
 
 ## About this project
 
-Afghan linkedin where users can connect and empower one another.
-Main 3 pages:
-- Chat page, all users can chat with one another
-- Connect page, all users can connect with another, by email and social media
-- Idea page, user can post an idea for others to see
+A site where Afghans can find one another and support one another by adding themselves as a contact and their business.
+Only registered users can add a limit of 1 professional and 1 business, they can edit their profile from the top-right profile dropdown.
+
+Main pages are:
+- Professional
+- Businesses directory
+- Ideas
+- Chat (only displays last 100 messages)
+- Profile (logged in user can edit their proffesional card)
+- Business (logged in user can edit their business card)
+
+## Technology
+
+Firebase was used for authentication and storage to keep this project simple.
+
+https://github.com/afghan-tech-bro/afghan-linkedin-api
+An expressJs api was used solely for the logged in user to add import their info from linkedin.
+
 
 ## Setup
 
