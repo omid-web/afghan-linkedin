@@ -8,7 +8,7 @@ const props = defineProps({
 
 <template>
   <div class="message">
-    <span v-if="!sender">{{ name }}</span>
+    <span class="flex" :class="sender ? 'flex-row-reverse mr-10' : ''">{{ name }}</span>
     <div class="flex" :class="sender ? 'flex-row-reverse' : ''">
       <img class="mt-1 avatar" :src="photoUrl" />
       <div class="text w-3/4" :class="sender ? 'bg-green-800' : 'bg-gray-900'">

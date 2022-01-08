@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useGuard from '@composables/auth/guards';
 
-useGuard(true, 'sign-in');
+// useGuard(true, 'sign-in');
 </script>
 
 <template>

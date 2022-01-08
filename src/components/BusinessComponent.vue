@@ -2,34 +2,32 @@
 import fireStore from '@/store/fire';
 
 const props = defineProps<{
-  user?: any,
+  business?: any,
 }>();
 
 const {
   displayName,
   email,
-  jobTitle,
+  website,
   industry,
-  whoCanContact,
-  bio,
-  profilePic,
+  location,
+  description,
   linkedin,
   facebook,
   twitter,
   instagram,
-} = toRefs(props.user);
+} = toRefs(props.business);
 
-const updateProfile = () => {
+const updateBusiness = () => {
   fireStore.dispatch(
-    'updateLinkedin',
+    'updateBusiness',
     {
       displayName: displayName.value,
       email: email.value,
-      jobTitle: jobTitle.value,
+      website: website.value,
       industry: industry.value,
-      whoCanContact: whoCanContact.value,
-      bio: bio.value,
-      profilePic: profilePic.value,
+      location: location.value,
+      description: description.value,
       linkedin: linkedin.value,
       facebook: facebook.value,
       twitter: twitter.value,
@@ -40,11 +38,11 @@ const updateProfile = () => {
 </script>
 
 <template>
-<form class="pb-8 space-y-6" @submit.prevent="updateProfile">
+<form class="pb-8 space-y-6" @submit.prevent="updateBusiness">
   <div class="rounded-md shadow-sm space-y-3">
     <div>
-      <label for="full-name">Full name</label>
-      <input id="full-name" v-model="displayName" type="text" required
+      <label for="business-name">Business name</label>
+      <input id="business-name" v-model="displayName" type="text" required
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
@@ -55,8 +53,14 @@ const updateProfile = () => {
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
     <div>
-      <label for="jobTitle">Job Title</label>
-      <input id="jobTitle" v-model="jobTitle" type="text"
+      <label for="website">Website</label>
+      <input id="website" v-model="website" type="text"
+        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
+        rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
+    </div>
+    <div>
+      <label for="location">Location</label>
+      <input id="location" v-model="location" type="text"
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
@@ -70,16 +74,10 @@ const updateProfile = () => {
       </select>
     </div>
   </div>
-  <!-- <div>
-    <label for="whoCanContact">Who should contact you?</label>
-    <input id="whoCanContact" v-model="whoCanContact" type="text"
-      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-      rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
-  </div> -->
   <div>
-    <label for="bio">Bio</label>
+    <label for="description">Description</label>
     <textarea
-      id="bio" v-model="bio" name="bio" rows="3"
+      id="description" v-model="description" name="description" rows="3"
       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
       rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
       type="text"
@@ -108,7 +106,7 @@ const updateProfile = () => {
   <button type="submit"
     class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium
     rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-    Update Profile
+    Update Business listing
   </button>
 </form>
 </template>

@@ -6,10 +6,17 @@ import {
 import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 import logoUrl from '/AF.svg';
 
-const navigation = [
+let navigation = [
   { name: 'Home', href: '/', current: false },
+  { name: 'Professionals', href: 'professionals', current: false },
+  { name: 'Business Directory', href: 'directory', current: false },
+];
+
+let navigationLogged = [
+  { name: 'Home', href: '/', current: false },
+  { name: 'Professionals', href: 'professionals', current: false },
+  { name: 'Business Directory', href: 'directory', current: false },
   { name: 'Chat', href: 'chat', current: false },
-  { name: 'Connect', href: 'connect', current: false },
   { name: 'Ideas', href: 'ideas', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
@@ -44,16 +51,16 @@ function logout() {
         <div class="flex-shrink-0 flex items-center">
           <img class="block h-8 w-auto" :src=logoUrl alt="Logo" />
         </div>
-        <div v-if="logged" class="hidden sm:block sm:ml-6">
+        <div v-if="!logged" class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <a v-for="item in navigation" :key="item.name" :href="item.href" 
+            <a v-for="item in navigation" :key="item.name" :href="item.href"
               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
               :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
           </div>
         </div>
-        <div v-if="!logged" class="hidden sm:block sm:ml-6">
+        <div v-if="logged" class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <a :key="item.name" :href="item.href"
+            <a v-for="item in navigationLogged" :key="item.name" :href="item.href"
               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
               :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
           </div>
@@ -84,7 +91,10 @@ function logout() {
                 <a href="profile" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</a>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <a @click="logout" href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
+                <a href="business" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Business</a>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <a @click="logout" href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
               </MenuItem>
             </MenuItems>
           </transition>
@@ -95,7 +105,10 @@ function logout() {
 
   <DisclosurePanel class="sm:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
+      <DisclosureButton :v-if=!logged v-for="item in navigation" :key="item.name" as="a" :href="item.href"
+        :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
+        :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+      <DisclosureButton :v-if=logged v-for="item in navigationLogged" :key="item.name" as="a" :href="item.href"
         :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
         :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
     </div>

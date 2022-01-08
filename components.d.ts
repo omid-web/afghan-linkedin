@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BusinessCardComponent: typeof import('./src/components/BusinessCardComponent.vue')['default']
+    BusinessComponent: typeof import('./src/components/BusinessComponent.vue')['default']
     IdeaCardComponent: typeof import('./src/components/IdeaCardComponent.vue')['default']
     IndustryOptionsComponent: typeof import('./src/components/IndustryOptionsComponent.vue')['default']
     LinkedinButtonComponent: typeof import('./src/components/LinkedinButtonComponent.vue')['default']

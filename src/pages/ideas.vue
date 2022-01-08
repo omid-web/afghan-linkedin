@@ -29,7 +29,7 @@ const sendIdea = () => {
             id="idea" name="idea" rows="4" required
             class="bg-gray-100 text-black flex-grow px-5 focus:outline-none"
             type="text"
-            :placeholder="'Share an idea, ' + [[ user.displayName ]]"
+            :placeholder="'Share an idea, ' + [[ user?.displayName ]]"
             v-model="idea"
           />
           <button type="submit"
@@ -53,5 +53,7 @@ export default {
 </script>
 
 <route lang="yaml">
-name: 'ideas-page'
+name: 'ideas'
+meta:
+  layout: 'user'
 </route>

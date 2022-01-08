@@ -12,16 +12,13 @@ import {
   getDoc,
   getDocs,
   serverTimestamp,
-  Timestamp,
   limit,
+  Timestamp,
 } from 'firebase/firestore';
-import {
-  User
-} from 'firebase/auth';
 
 import { db } from '@/services/firebase';
 import linkedinService from '@/services/linkedin';
-import { linkedinUser, FireState } from "@/types";
+import { linkedinUser, FireState, business } from "@/types";
 import { useLoading } from '@/loading'
 
 const loading = useLoading();
@@ -32,6 +29,8 @@ const fireStore = createStore({
       user: null,
       linkedinUser: null,
       linkedinUsers: [],
+      business: null,
+      businesses: [],
       messages: [],
       ideas: []
     };
@@ -47,6 +46,12 @@ const fireStore = createStore({
     getAllLinkedinUsers(state) {
       return state.linkedinUsers;
     },
+    getBusiness(state) {
+      return state.business;
+    },
+    getAllBusinesses(state) {
+      return state.businesses;
+    },
     getMessages(state) {
       return state.messages;
     },
@@ -61,12 +66,16 @@ const fireStore = createStore({
     setUser: (state, user) => state.user = user,
     setLinkedinUser: (state, linkedinUser) => state.linkedinUser = linkedinUser,
     setAllLinkedinUsers: (state, linkedinUsers) => state.linkedinUsers = linkedinUsers,
+    setBusiness: (state, business) => state.business = business,
+    setAllBusinesses: (state, businesses) => state.businesses = businesses,
     setMessages: (state, messages) => state.messages = messages,
     setIdeas: (state, ideas) => state.ideas = ideas,
     resetState: (state) => state = {
       user: null,
       linkedinUser: null,
       linkedinUsers: [],
+      business: null,
+      businesses: [],
       messages: [],
       ideas: []
     },
@@ -113,10 +122,9 @@ const fireStore = createStore({
         twitter: linkedinUser.twitter,
         instagram: linkedinUser.instagram,
         createdAt: serverTimestamp()
-      }).then(() => {
-        commit('setLinkedinUser', linkedinUser);
-        loading.end();
       })
+      .then(() => commit('setLinkedinUser', linkedinUser))
+      .finally(() => loading.end());
     },
     async getLinkedin({ commit }) {
       loading.start();
@@ -139,8 +147,8 @@ const fireStore = createStore({
           createdAt: docSnap.data().createdAt,
         }
         commit('setLinkedinUser', userData);
-        loading.end();
       }
+      loading.end();
     },
     async getAllLinkedinUsers({ commit }) {
       loading.start();
@@ -166,6 +174,88 @@ const fireStore = createStore({
         linkedinUsers.push(userData);
       }
       commit('setAllLinkedinUsers', linkedinUsers);
+      loading.end();
+    },
+    async updateBusiness({ commit }, business) {
+      loading.start();
+      const docRef = doc(db, `businesses`, `${this.state.user?.uid}`)
+      updateDoc(docRef, {
+        displayName: business.displayName,
+        email: business.email,
+        location: business.location,
+        website: business.website,
+        industry: business.industry,
+        description: business.description,
+        linkedin: business.linkedin,
+        facebook: business.facebook,
+        twitter: business.twitter,
+        instagram: business.instagram,
+        createdAt: serverTimestamp()
+      })
+      .then(() => commit('setBusiness', business))
+      .finally(() => loading.end());
+    },
+    async getBusiness({ commit }) {
+      if (!this.state.user) return;
+      loading.start();
+      let businessData: business = {
+        displayName: '',
+        email: '',
+        website: '',
+        industry: '',
+        location: '',
+        description: '',
+        linkedin: '',
+        facebook: '',
+        instagram: '',
+        twitter: '',
+        createdAt: Timestamp.now(),
+      }
+      const docRef = doc(db, `businesses`, `${this.state.user?.uid}`)
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        businessData = {
+          displayName: docSnap.data().displayName,
+          website: docSnap.data().website,
+          location: docSnap.data().location,
+          email: docSnap.data().email,
+          industry: docSnap.data().industry,
+          description: docSnap.data().description,
+          linkedin: docSnap.data().linkedin,
+          facebook: docSnap.data().facebook,
+          twitter: docSnap.data().twitter,
+          instagram: docSnap.data().instagram,
+          createdAt: docSnap.data().createdAt,
+        }
+      } else {
+        await setDoc(docRef, businessData);
+      }
+      commit('setBusiness', businessData);
+      loading.end();
+    },
+    async getAllBusinesses({ commit }) {
+      loading.start();
+      let businesses: business[] = [];
+      const q = query(collection(db, "businesses"), orderBy("displayName", "desc"));
+      const querySnapshot = await getDocs(q);
+      for (const doc of querySnapshot.docs) {
+        // @ts-ignore
+        const businessData: business = {
+          displayName: doc.data().displayName,
+          website: doc.data().website,
+          location: doc.data().location,
+          email: doc.data().email,
+          industry: doc.data().industry,
+          description: doc.data().description,
+          linkedin: doc.data().linkedin,
+          facebook: doc.data().facebook,
+          twitter: doc.data().twitter,
+          instagram: doc.data().instagram,
+          createdAt: doc.data().createdAt,
+        }
+        businesses.push(businessData);
+      }
+      commit('setAllBusinesses', businesses);
       loading.end();
     },
     async getMessages({ commit }) {
