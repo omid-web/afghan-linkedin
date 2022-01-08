@@ -1,5 +1,11 @@
 # Vue 3 Template
 
+## TODO
+
+- improve the homepage, more informative and prettier
+- add share buttons to the proffesional and business cards.
+
+
 ## About this project
 
 A site where Afghans can find one another and support one another by adding themselves as a contact and their business.
