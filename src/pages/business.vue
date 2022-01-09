@@ -3,7 +3,23 @@ import fireStore from '@/store/fire';
 
 fireStore.dispatch('getBusiness');
 
-const business = computed(() => fireStore.getters.getBusiness);
+const business = computed(() => {
+  if (!fireStore.getters.getBusiness) {
+    return {
+      displayName: '',
+      website: '',
+      location: '',
+      email: '',
+      industry: '',
+      description: '',
+      linkedin: '',
+      facebook: '',
+      twitter: '',
+      instagram: '',
+    };
+  }
+  return fireStore.getters.getBusiness;
+});
 
 </script>
 

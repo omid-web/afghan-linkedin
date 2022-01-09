@@ -83,11 +83,25 @@ const fireStore = createStore({
   actions: {
     setUser: ({ commit }, user) => commit('setUser', user),
     resetState: ({ commit }) => commit('resetState'),
-    async setLinkedin({ commit }, code) {
-      await linkedinService.getLinkedinInfo(code)
+    setLinkedin({ commit }, code) {
+      linkedinService.getLinkedinInfo(code)
         .then((res: any) => {
           const docRef = doc(db, `users`, `${this.state.user?.uid}`)
           setDoc(docRef, {
+            displayName: res.data.name,
+            email: res.data.email,
+            jobTitle: '',
+            industry: '',
+            whoCanContact: '',
+            bio: '',
+            profilePic: res.data.profilePic,
+            linkedin: '',
+            facebook: '',
+            instagram: '',
+            twitter: '',
+            createdAt: serverTimestamp(),
+          });
+          commit('setLinkedinUser', {
             displayName: res.data.name,
             email: res.data.email,
             jobTitle: '',
@@ -106,7 +120,7 @@ const fireStore = createStore({
           throw err;
         });
     },
-    async updateLinkedin({ commit }, linkedinUser) {
+    updateLinkedin({ commit }, linkedinUser) {
       loading.start();
       const docRef = doc(db, `users`, `${this.state.user?.uid}`)
       updateDoc(docRef, {
@@ -124,6 +138,7 @@ const fireStore = createStore({
         createdAt: serverTimestamp()
       })
       .then(() => commit('setLinkedinUser', linkedinUser))
+      .catch((err: any) => { throw err })
       .finally(() => loading.end());
     },
     async getLinkedin({ commit }) {
@@ -236,7 +251,7 @@ const fireStore = createStore({
       commit('setAllBusinesses', businesses);
       loading.end();
     },
-    async getMessages({ commit }) {
+    getMessages({ commit }) {
       loading.start();
       const q = query(collection(db, "messages"), orderBy("createdAt", "desc"), limit(100))
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -268,7 +283,7 @@ const fireStore = createStore({
       });
       loading.end();
     },
-    async getIdeas({ commit }) {
+    getIdeas({ commit }) {
       loading.start();
       const q = query(collection(db, "ideas"), orderBy("createdAt", "desc"), limit(100))
       const unsubscribe = onSnapshot(q, (querySnapshot) => {

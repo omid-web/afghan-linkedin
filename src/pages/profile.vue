@@ -11,7 +11,6 @@ if (code !== '') {
 }
 
 const user = computed(() => fireStore.getters.getLinkedinUser);
-
 </script>
 
 <template>

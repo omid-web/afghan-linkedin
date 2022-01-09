@@ -6,10 +6,11 @@ const props = defineProps<{
 }>();
 
 const loggedUser = fireStore.getters.getUser;
-const linkedin = `https://linkedin.com/in/${props.business?.linkedin}`;
-const facebook = `https://facebook.com/${props.business?.facebook}`;
-const twitter = `https://twitter.com/${props.business?.twitter}`;
-const instagram = `https://instagram.com/${props.business?.instagram}`;
+const website = `https://${props.business.website}`;
+const linkedin = `https://linkedin.com/in/${props.business.linkedin}`;
+const facebook = `https://facebook.com/${props.business.facebook}`;
+const twitter = `https://twitter.com/${props.business.twitter}`;
+const instagram = `https://instagram.com/${props.business.instagram}`;
 
 const emailLink = `
 mailto:${props.business?.email}?
@@ -38,9 +39,7 @@ Regards, ${loggedUser?.displayName}`;
       {{ business?.description }}
     </div>
     <div class="flex">
-      <form :action=emailLink method="post">
-        <button type="submit" class="email">Email</button>
-      </form>
+      <a :href=website target="_blank" class="website">Website</a>
       <a :href=linkedin target="_blank" :class='["fa fa-linkedin", !props.business?.linkedin && "opacity-40 pointer-events-none"]' />
       <a :href=facebook target="_blank" :class='["fa fa-facebook", !props.business?.facebook && "opacity-40 pointer-events-none"]' />
       <a :href=twitter target="_blank" :class='["fa fa-twitter", !props.business?.twitter && "opacity-40 pointer-events-none"]' />
@@ -50,7 +49,7 @@ Regards, ${loggedUser?.displayName}`;
 </template>
 
 <style scoped>
-.email {
+.website {
   padding: 10px;
   font-size: 20px;
   width: 100px;
