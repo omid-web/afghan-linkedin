@@ -1,3 +1,4 @@
+.github
 node_modules
 .DS_Store
 dist
@@ -5,3 +6,6 @@ dist-ssr
 *.local
 .eslintcache
 .env
+.firebase*
+firebase*
+firestore*
