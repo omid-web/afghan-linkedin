@@ -5,6 +5,7 @@ import {
 } from '@headlessui/vue';
 import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 import logoUrl from '/AF.svg';
+import userUrl from '/user.png';
 
 const navigationNotLogged = [
   { name: 'Home', href: '/', current: false },
@@ -23,7 +24,7 @@ const item = { name: 'Home', href: '/', current: false };
 const logged = computed(() => authStore.getters.logged);
 const photoURL = computed(() => {
   if (!('user' in authStore.state) || !authStore.state.user?.photoURL) {
-    return '';
+    return userUrl;
   }
   return authStore.state.user?.photoURL;
 });

@@ -120,7 +120,6 @@ span {
   padding:3px;
   margin-bottom: 4px;
   border:1px #888 solid;
-  display: block;
 }
 
 </style>

@@ -17,12 +17,6 @@ bcc=afghan.tech.bro@gmail.com&
 subject=afghan-linkedin.com%3A%20Let's%20connect%20&
 body=Hi ${props.user.displayName},%0D%0D
 I am interested in collabrating with you. Can we talk?%0D%0D
-Ways to get in touch with me besides replying to this email are:%0D
-${linkedin}%0D
-${facebook}%0D
-${twitter}%0D
-${instagram}%0D
-%0D%0D%0D
 Regards, ${loggedUser?.displayName}`;
 </script>
 

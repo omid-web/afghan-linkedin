@@ -16,7 +16,7 @@ const filteredUsers = computed(() => {
 </script>
 
 <template>
-<div class="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
+<div class="min-h-full flex items-center justify-center px-4 pb-8 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="text-center text-2xl font-extrabold">

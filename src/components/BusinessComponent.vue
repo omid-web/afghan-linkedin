@@ -56,9 +56,11 @@ const updateBusiness = () => {
     </div>
     <div>
       <label for="website">Website</label>
-      <input id="website" v-model="website" type="text"
-        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-        rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
+      <span>
+        https://
+        <input id="instagram" v-model="website" type="text" placeholder="example.com"
+        class="flex-1 border border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-green-500 focus:border-green-500"/>
+      </span>
     </div>
     <div>
       <label for="location">Location</label>
@@ -88,21 +90,27 @@ const updateBusiness = () => {
   </div>
   <div name="socials">
     <div>Socials</div>
-    <span class="flex">
+    <span>
       https://linkedin.com/in/
-      <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle" class="text-gray-900 flex-1" />
+      <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle"
+        class="flex-1 border border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-green-500 focus:border-green-500"/>
     </span>
-    <span class="flex">
+    <div>
+      <span>
       https://facebook.com/
-      <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle" class="text-gray-900 flex-1" />
+      <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle"
+        class="flex-1 border border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-green-500 focus:border-green-500"/>
     </span>
-    <span class="flex">
+    </div>
+    <span>
       https://twitter.com/
-      <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle" class="text-gray-900 flex-1"/>
+      <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle"
+        class="flex-1 border border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-green-500 focus:border-green-500"/>
     </span>
-    <span class="flex">
+    <span>
       https://instagram.com/
-      <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle" class="text-gray-900 flex-1"/>
+      <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle"
+        class="flex-1 border border-gray-300 placeholder-gray-500 text-gray-900 focus:ring-green-500 focus:border-green-500"/>
     </span>
   </div>
   <button type="submit"
@@ -120,7 +128,7 @@ span {
   padding:3px;
   margin-bottom: 4px;
   border:1px #888 solid;
-  display: block;
+  display: flex;
 }
 
 </style>
