@@ -176,45 +176,25 @@ const fireStore = createStore({
       commit('setAllLinkedinUsers', linkedinUsers);
       loading.end();
     },
-    async updateBusiness({ commit }, business) {
+    async updateBusiness({ commit }, businessData) {
       loading.start();
       const docRef = doc(db, `businesses`, `${this.state.user?.uid}`)
-      updateDoc(docRef, {
-        displayName: business.displayName,
-        email: business.email,
-        location: business.location,
-        website: business.website,
-        industry: business.industry,
-        description: business.description,
-        linkedin: business.linkedin,
-        facebook: business.facebook,
-        twitter: business.twitter,
-        instagram: business.instagram,
-        createdAt: serverTimestamp()
-      })
-      .then(() => commit('setBusiness', business))
-      .finally(() => loading.end());
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        await updateDoc(docRef, businessData)
+      } else {
+        await setDoc(docRef, businessData);
+      }
+      commit('setBusiness', businessData);
+      loading.end();
     },
     async getBusiness({ commit }) {
       if (!this.state.user) return;
       loading.start();
-      let businessData: business = {
-        displayName: '',
-        email: '',
-        website: '',
-        industry: '',
-        location: '',
-        description: '',
-        linkedin: '',
-        facebook: '',
-        instagram: '',
-        twitter: '',
-        createdAt: Timestamp.now(),
-      }
       const docRef = doc(db, `businesses`, `${this.state.user?.uid}`)
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        businessData = {
+        const businessData = {
           displayName: docSnap.data().displayName,
           website: docSnap.data().website,
           location: docSnap.data().location,
@@ -227,10 +207,8 @@ const fireStore = createStore({
           instagram: docSnap.data().instagram,
           createdAt: docSnap.data().createdAt,
         }
-      } else {
-        await setDoc(docRef, businessData);
+        commit('setBusiness', businessData);
       }
-      commit('setBusiness', businessData);
       loading.end();
     },
     async getAllBusinesses({ commit }) {

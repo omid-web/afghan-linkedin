@@ -17,11 +17,17 @@ const filteredBusinesses = computed(() => {
 <template>
 <div class="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
-    <a href='business' v-if=loggedUser
-      class="group relative w-full flex justify-center py-2 px-4 mt-6 border border-transparent text-sm font-medium
-      rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-      Add your business
-    </a>
+    <div>
+      <h2 class="text-center text-2xl font-extrabold">
+        Support & Follow
+      </h2>
+
+      <a href='business' v-if=loggedUser
+        class="group relative w-full flex justify-center py-2 px-4 mt-2 border border-transparent text-sm font-medium
+        rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+        Add/edit your business card
+      </a>
+    </div>
 
     <div>
       <label for="industry">Filter by industry(businesses are sorted alphabetically)</label>

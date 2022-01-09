@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Timestamp } from 'firebase/firestore';
 import fireStore from '@/store/fire';
 
 const props = defineProps<{
@@ -32,6 +33,7 @@ const updateBusiness = () => {
       facebook: facebook.value,
       twitter: twitter.value,
       instagram: instagram.value,
+      createdAt: Timestamp.now(),
     },
   );
 };
