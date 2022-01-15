@@ -1,26 +1,9 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
+import businessStore from '@store/business';
 
-fireStore.dispatch('getBusiness');
-
-const business = computed(() => {
-  if (!fireStore.getters.getBusiness) {
-    return {
-      displayName: '',
-      website: '',
-      location: '',
-      email: '',
-      industry: '',
-      description: '',
-      linkedin: '',
-      facebook: '',
-      twitter: '',
-      instagram: '',
-    };
-  }
-  return fireStore.getters.getBusiness;
-});
-
+const store = businessStore();
+store.getBusiness();
+const business = computed(() => store.business);
 </script>
 
 <template>
@@ -30,7 +13,7 @@ const business = computed(() => {
       <h2 class="text-center text-2xl font-extrabold">
         Edit your business listing
       </h2>
-      <BusinessComponent :business=business />
+      <BusinessComponent v-if=business />
       <BusinessCardComponent :business=business class="mb-6"/>
     </div>
   </div>

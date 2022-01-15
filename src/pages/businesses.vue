@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import fireStore from '@store/fire';
-
-fireStore.dispatch('getAllBusinesses');
+import authStore from '@store/auth';
+import businessStore from '@store/business';
 
 const industry = ref('');
-const loggedUser = computed(() => fireStore.getters.getUser);
-const businesses = computed(() => fireStore.getters.getAllBusinesses);
+
+const auth = authStore();
+const logged = computed(() => auth.logged);
+
+const business = businessStore();
+business.getAllBusinesses();
+const businesses = computed(() => business.getAllBusinesses);
 const filteredBusinesses = computed(() => {
   if (!industry.value.length) return businesses.value;
   // @ts-ignore
   return businesses.value.filter((business) => business.industry === industry.value);
 });
-
 </script>
 
 <template>
@@ -22,7 +25,7 @@ const filteredBusinesses = computed(() => {
         Support & Follow
       </h2>
 
-      <a href='business' v-if=loggedUser
+      <a href='business' v-if=logged
         class="group relative w-full flex justify-center py-2 px-4 mt-2 border border-transparent text-sm font-medium
         rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
         Add/edit your business card
@@ -31,7 +34,7 @@ const filteredBusinesses = computed(() => {
 
     <div>
       <label for="industry">Filter by industry(businesses are sorted alphabetically)</label>
-      <select id="industry" v-model="industry" name="industry"
+      <select id="industry" v-model=industry name="industry"
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
         <option value="" selected>All</option>
@@ -46,10 +49,10 @@ const filteredBusinesses = computed(() => {
 
 <script lang="ts">
 export default {
-  name: 'directory-page',
+  name: 'businesses-page',
 };
 </script>
 
 <route lang="yaml">
-name: 'directory'
+name: 'businesses'
 </route>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
 
+const auth = authStore();
 const props = defineProps({
   title: String,
 });
-
+const signin = () => auth.signInWithGoogle();
 </script>
 
 <template>
@@ -13,8 +14,8 @@ const props = defineProps({
 </h2>
 
 
-<button @click="authStore.dispatch('signInWithGoogle')"
-  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium 
+<button @click=signin
+  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium
   rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
   <span class="absolute left-0 inset-y-0 flex items-center pl-3">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

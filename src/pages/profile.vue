@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
+import linkedinStore from '@store/linkedin';
 
+const linkedin = linkedinStore();
 const url = window.location.href;
 // @ts-ignore
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)=(\S*)/)[1] : '';
 if (code !== '') {
-  fireStore.dispatch('setLinkedin', code);
+  linkedin.setLinkedin(code);
 } else {
-  fireStore.dispatch('getLinkedin');
+  linkedin.getUser();
 }
-
-const user = computed(() => fireStore.getters.getLinkedinUser);
+const user = computed(() => linkedin.getUser);
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const user = computed(() => fireStore.getters.getLinkedinUser);
       <h2 class="text-center text-2xl font-extrabold">
         Edit your contact card
       </h2>
-      <ProfileComponent :user=user />
+      <ProfileComponent />
       <UserCardComponent :user=user class="mb-6"/>
     </div>
 

@@ -2,7 +2,8 @@
 import authStore from '@store/auth';
 import homeUrl from '/homepage-afghan.jpeg';
 
-const logged = computed(() => authStore.getters.logged);
+const auth = authStore();
+const logged = computed(() => auth.logged);
 </script>
 
 <template>
@@ -21,7 +22,9 @@ const logged = computed(() => authStore.getters.logged);
       <h1 class="font-bold text-5xl sm:text-6xl text-white leading-tight mt-4">
         Support Afghan owned businesses
       </h1>
-      <router-link v-if="!logged" to="register" class="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10">Sign up</router-link>
+      <router-link v-if=!logged to="register" class="block bg-white hover:bg-gray-100 py-3 px-4 rounded-lg text-lg text-gray-800 font-bold uppercase mt-10">
+        Sign up
+      </router-link>
     </div>
   </div>
 </div>

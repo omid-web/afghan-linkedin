@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import fireStore from '@store/fire';
-
-fireStore.dispatch('getAllLinkedinUsers');
+import authStore from '@store/auth';
+import linkedinStore from '@store/linkedin';
 
 const industry = ref('');
-const loggedUser = computed(() => fireStore.getters.getUser);
-const user = computed(() => fireStore.getters.getLinkedinUser);
-const users = computed(() => fireStore.getters.getAllLinkedinUsers);
+
+const auth = authStore();
+const logged = computed(() => auth.logged);
+
+const store = linkedinStore();
+store.getAllUsers();
+const users = computed(() => store.getAllUsers);
 const filteredUsers = computed(() => {
   if (!industry.value.length) return users.value;
   // @ts-ignore
@@ -23,7 +26,7 @@ const filteredUsers = computed(() => {
         Collaborate & Follow
       </h2>
 
-      <a href='profile' v-if=loggedUser
+      <a href='profile' v-if=logged
         class="group relative w-full flex justify-center py-2 px-4 mt-2 border border-transparent text-sm font-medium
         rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
         Add/edit your professional card

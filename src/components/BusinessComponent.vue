@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import { Timestamp } from 'firebase/firestore';
-import fireStore from '@/store/fire';
+import businessStore from '@store/business';
 
-const props = defineProps<{
-  business?: any,
-}>();
-
+const store = businessStore();
 const {
   displayName,
   email,
@@ -17,11 +14,10 @@ const {
   facebook,
   twitter,
   instagram,
-} = toRefs(props.business);
+} = toRefs(store.getBusiness);
 
 const updateBusiness = () => {
-  fireStore.dispatch(
-    'updateBusiness',
+  store.updateBusiness(
     {
       displayName: displayName.value,
       email: email.value,
@@ -40,7 +36,7 @@ const updateBusiness = () => {
 </script>
 
 <template>
-<form class="pb-8 space-y-6" @submit.prevent="updateBusiness">
+<form class="pb-8 space-y-6" @submit.prevent=updateBusiness>
   <div class="rounded-md shadow-sm space-y-3">
     <div>
       <label for="business-name">Business name</label>

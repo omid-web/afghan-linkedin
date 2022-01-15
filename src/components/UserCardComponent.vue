@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
-
 const props = defineProps<{
   user?: any,
 }>();
 
-const loggedUser = fireStore.getters.getUser || null;
+const loggedUser = {};
 const linkedin = `https://linkedin.com/in/${props.user.linkedin}`;
 const facebook = `https://facebook.com/${props.user.facebook}`;
 const twitter = `https://twitter.com/${props.user.twitter}`;
@@ -17,7 +15,7 @@ bcc=afghan.tech.bro@gmail.com&
 subject=afghan-linkedin.com%3A%20Let's%20connect%20&
 body=Hi ${props.user.displayName},%0D%0D
 I am interested in collabrating with you. Can we talk?%0D%0D
-Regards, ${loggedUser?.displayName}`;
+Regards, ${loggedUser}`;
 </script>
 
 <template>

@@ -7,31 +7,16 @@ import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 import logoUrl from '/AF.svg';
 import userUrl from '/user.png';
 
-const navigationNotLogged = [
+const auth = authStore();
+const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Business Directory', href: 'directory', current: false },
-];
-const navigationLogged = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Business Directory', href: 'directory', current: false },
-  // { name: 'Chat', href: 'chat', current: false },
-  // { name: 'Ideas', href: 'ideas', current: false },
+  { name: 'Businesses', href: 'businesses', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
-
-const logged = computed(() => authStore.getters.logged);
-const photoURL = computed(() => {
-  if (!('user' in authStore.state) || !authStore.state.user?.photoURL) {
-    return userUrl;
-  }
-  return authStore.state.user?.photoURL;
-});
-
-function logout() {
-  authStore.dispatch('logout');
-}
+const logged = computed(() => auth.logged);
+const photoURL = computed(() => auth.user?.photoURL);
+const logout = () => auth.logout;
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
@@ -52,13 +37,8 @@ function logout() {
           <img class="block h-8 w-auto" :src=logoUrl alt="Logo" />
         </div>
         <div class="hidden sm:block sm:ml-6">
-          <div v-if=!logged class="flex space-x-4">
-            <a v-for="item in navigationNotLogged" :key="item.name" :href="item.href"
-              :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
-              :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-          </div>
-          <div v-if=logged class="flex space-x-4">
-            <a v-for="item in navigationLogged" :key="item.name" :href="item.href"
+          <div class="flex space-x-4">
+            <a v-for="item in navigation" :key="item.name" :href="item.href"
               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
               :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
           </div>
@@ -88,7 +68,7 @@ function logout() {
                 <a href="business" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Business</a>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <a @click="logout" href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
+                <a @click=logout href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
               </MenuItem>
             </MenuItems>
           </transition>
@@ -98,13 +78,8 @@ function logout() {
   </div>
 
   <DisclosurePanel class="sm:hidden">
-    <div v-if=!logged class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigationNotLogged" :key="item.name" as="a" :href="item.href"
-        :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
-        :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
-    </div>
-    <div v-if=logged class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigationLogged" :key="item.name" as="a" :href="item.href"
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
         :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
         :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
     </div>

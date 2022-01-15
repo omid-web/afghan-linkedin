@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
-
 const props = defineProps<{
   business?: any,
 }>();
 
-const loggedUser = fireStore.getters.getUser;
+const loggedUser = {};
 const website = `https://${props.business.website}`;
 const linkedin = `https://linkedin.com/in/${props.business.linkedin}`;
 const facebook = `https://facebook.com/${props.business.facebook}`;
@@ -18,7 +16,7 @@ bcc=afghan.tech.bro@gmail.com&
 subject=afghan-linkedin.com%3A%20Let's%20connect%20&
 body=Hi ${props.business?.displayName},%0D%0D
 I am interested in collabrating with you. Can we talk?%0D%0D
-Regards, ${loggedUser?.displayName}`;
+Regards, ${loggedUser}`;
 </script>
 
 <template>

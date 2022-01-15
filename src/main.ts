@@ -8,7 +8,8 @@ import { setupLayouts } from 'virtual:generated-layouts';
 import generatedRoutes from 'virtual:generated-pages';
 
 // State Management
-import store from './store/fire';
+import { createPinia } from 'pinia';
+import piniaPersist from 'pinia-plugin-persist';
 
 // Base Component
 import App from './App.vue';
@@ -25,7 +26,9 @@ const router = createRouter({
 });
 
 // Add state management
-app.use(store);
+const pinia = createPinia();
+pinia.use(piniaPersist);
+app.use(pinia);
 
 // Add the router to app
 app.use(router);

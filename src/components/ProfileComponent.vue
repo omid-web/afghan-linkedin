@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
+import { Timestamp } from 'firebase/firestore';
+import linkedinStore from '@store/linkedin';
 
-const props = defineProps<{
-  user?: any,
-}>();
-
+const store = linkedinStore();
 const {
   displayName,
   email,
@@ -17,11 +15,10 @@ const {
   facebook,
   twitter,
   instagram,
-} = toRefs(props.user);
+} = toRefs(store.getUser);
 
 const updateProfile = () => {
-  fireStore.dispatch(
-    'updateLinkedin',
+  store.updateLinkedin(
     {
       displayName: displayName.value,
       email: email.value,
@@ -34,13 +31,14 @@ const updateProfile = () => {
       facebook: facebook.value,
       twitter: twitter.value,
       instagram: instagram.value,
+      createdAt: Timestamp.now(),
     },
   );
 };
 </script>
 
 <template>
-<form class="pb-8 space-y-6" @submit.prevent="updateProfile">
+<form class="pb-8 space-y-6" @submit.prevent=updateProfile>
   <div class="rounded-md shadow-sm space-y-3">
     <div>
       <label for="full-name">Full name</label>
