@@ -7,6 +7,7 @@ import {
   updateDoc,
   getDoc,
   getDocs,
+  Timestamp,
 } from 'firebase/firestore';
 
 import authStore from '@store/auth';
@@ -15,30 +16,38 @@ import { BusinessState, Business } from '@interfaces/business';
 import { useLoading } from '@/loading';
 
 const loading = useLoading();
+const auth = authStore();
 
-const businessStore = defineStore('business', {
+const businessStore = defineStore('businessStore', {
   state: () => {
     const state: BusinessState = {
-      business: null,
+      business: {
+        displayName: 'business',
+        website: '',
+        location: '',
+        email: '',
+        industry: '',
+        description: '',
+        linkedin: '',
+        facebook: '',
+        twitter: '',
+        instagram: '',
+        createdAt: Timestamp.now()
+      },
       businesses: [],
       loading: false,
     };
     return state;
   },
   getters: {
-    getBusiness(state): Business | null {
-      return state.business;
-    },
-    getAllBusinesses(state): Business[] {
-      return state.businesses;
-    }
+    getBusiness: (state) => state.business,
+    getBusinesses: (state) => state.businesses,
   },
   actions: {
-    async getBusiness() {
+    async setBusiness() {
       try {
         this.loading = true;
-        const auth = authStore();
-        const docRef = doc(db, `Businesses`, `${auth.user.uid}`)
+        const docRef = doc(db, `businesses`, `${auth.user?.uid}`)
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const businessData = {
@@ -60,7 +69,7 @@ const businessStore = defineStore('business', {
         this.loading = false;
       }
     },
-    async getAllBusinesses() {
+    async setBusinesses() {
       try {
         this.loading = true;
         let businesses: Business[] = [];
@@ -91,10 +100,10 @@ const businessStore = defineStore('business', {
     async updateBusiness(businessData: Business) {
       try {
         this.loading = true;
-        const docRef = doc(db, `Businesses`, `${this.state.user?.uid}`)
+        const docRef = doc(db, `businesses`, `${auth.user?.uid}`)
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          await updateDoc(docRef, { businessData })
+          await updateDoc(docRef, { ...businessData })
         } else {
           await setDoc(docRef, businessData);
         }

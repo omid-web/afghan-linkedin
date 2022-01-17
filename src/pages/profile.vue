@@ -1,27 +1,28 @@
 <script setup lang="ts">
-import linkedinStore from '@store/linkedin';
+import profileStore from '@store/profile';
 
-const linkedin = linkedinStore();
+const store = profileStore();
 const url = window.location.href;
 // @ts-ignore
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)=(\S*)/)[1] : '';
+console.log('%cprofile.vue line:8 code', 'color: #007acc;', code);
 if (code !== '') {
-  linkedin.setLinkedin(code);
+  store.initalizeProfile(code);
 } else {
-  linkedin.getUser();
+  store.setProfile();
 }
-const user = computed(() => linkedin.getUser);
+const { profile } = storeToRefs(store);
 </script>
 
 <template>
 <div class="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
-    <div v-if=user>
+    <div v-if="profile">
       <h2 class="text-center text-2xl font-extrabold">
         Edit your contact card
       </h2>
-      <ProfileComponent />
-      <UserCardComponent :user=user class="mb-6"/>
+      <ProfileFormComponent />
+      <ProfileCardComponent :profile=profile class="mb-6"/>
     </div>
 
     <div v-else>

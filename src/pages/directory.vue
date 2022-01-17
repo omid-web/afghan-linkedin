@@ -5,11 +5,11 @@ import businessStore from '@store/business';
 const industry = ref('');
 
 const auth = authStore();
-const logged = computed(() => auth.logged);
+const { logged } = storeToRefs(auth);
 
-const business = businessStore();
-business.getAllBusinesses();
-const businesses = computed(() => business.getAllBusinesses);
+const store = businessStore();
+store.setBusinesses();
+const { businesses } = storeToRefs(store);
 const filteredBusinesses = computed(() => {
   if (!industry.value.length) return businesses.value;
   // @ts-ignore
@@ -49,10 +49,10 @@ const filteredBusinesses = computed(() => {
 
 <script lang="ts">
 export default {
-  name: 'businesses-page',
+  name: 'directory-page',
 };
 </script>
 
 <route lang="yaml">
-name: 'businesses'
+name: 'directory'
 </route>

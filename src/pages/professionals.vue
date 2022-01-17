@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
-import linkedinStore from '@store/linkedin';
+import profileStore from '@/store/profile';
 
 const industry = ref('');
 
 const auth = authStore();
-const logged = computed(() => auth.logged);
+const { logged } = storeToRefs(auth);
 
-const store = linkedinStore();
-store.getAllUsers();
-const users = computed(() => store.getAllUsers);
-const filteredUsers = computed(() => {
-  if (!industry.value.length) return users.value;
+const store = profileStore();
+store.setProfiles();
+const { profiles } = storeToRefs(store);
+const filteredProfiles = computed(() => {
+  if (!industry.value.length) return profiles.value;
   // @ts-ignore
-  return users.value.filter((user) => user.industry === industry.value);
+  return profiles.value.filter((user) => user.industry === industry.value);
 });
 
 </script>
@@ -43,7 +43,7 @@ const filteredUsers = computed(() => {
       </select>
     </div>
 
-    <UserCardComponent v-for="u in filteredUsers" :user=u :key=u.email />
+    <ProfileCardComponent v-for="p in filteredProfiles" :profile=p :key=p.email />
   </div>
 </div>
 </template>

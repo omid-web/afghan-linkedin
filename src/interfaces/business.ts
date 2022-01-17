@@ -15,7 +15,7 @@ interface Business {
 };
 
 interface BusinessState {
-  business: null | Business,
+  business: Business,
   businesses: Business[],
   loading: boolean,
 };

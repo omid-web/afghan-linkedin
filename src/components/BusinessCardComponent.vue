@@ -4,11 +4,11 @@ const props = defineProps<{
 }>();
 
 const loggedUser = {};
-const website = `https://${props.business.website}`;
-const linkedin = `https://linkedin.com/in/${props.business.linkedin}`;
-const facebook = `https://facebook.com/${props.business.facebook}`;
-const twitter = `https://twitter.com/${props.business.twitter}`;
-const instagram = `https://instagram.com/${props.business.instagram}`;
+const website = `https://${props.business?.website}`;
+const linkedin = `https://linkedin.com/in/${props.business?.linkedin}`;
+const facebook = `https://facebook.com/${props.business?.facebook}`;
+const twitter = `https://twitter.com/${props.business?.twitter}`;
+const instagram = `https://instagram.com/${props.business?.instagram}`;
 
 const emailLink = `
 mailto:${props.business?.email}?
@@ -27,8 +27,8 @@ Regards, ${loggedUser}`;
         <form :action=emailLink method="post">
           <button type="submit" class="email">{{ business?.email }}</button>
         </form>
-        <div>Industry: {{ business.industry }}</div>
-        <div>Location: {{ business.location }}</div>
+        <div>Industry: {{ business?.industry }}</div>
+        <div>Location: {{ business?.location }}</div>
       </div>
     </div>
     <div class="py-2">

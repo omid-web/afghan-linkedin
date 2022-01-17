@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase/firestore';
 
-interface LinkedinUser {
+interface Profile {
   displayName: string,
   email: string,
   jobTitle: string,
@@ -15,13 +15,13 @@ interface LinkedinUser {
   createdAt: Timestamp,
 };
 
-interface LinkedinState {
-  linkedinUser: null | LinkedinUser,
-  linkedinUsers: LinkedinUser[],
+interface ProfileState {
+  profile: Profile,
+  profiles: Profile[],
   loading: boolean,
 };
 
 export {
-  LinkedinUser,
-  LinkedinState
+  Profile,
+  ProfileState
 };

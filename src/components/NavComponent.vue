@@ -11,7 +11,7 @@ const auth = authStore();
 const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Businesses', href: 'businesses', current: false },
+  { name: 'Businesses', href: 'directory', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
 const logged = computed(() => auth.logged);

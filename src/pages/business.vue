@@ -2,8 +2,8 @@
 import businessStore from '@store/business';
 
 const store = businessStore();
-store.getBusiness();
-const business = computed(() => store.business);
+store.setBusiness();
+const { business } = storeToRefs(store);
 </script>
 
 <template>
@@ -13,8 +13,8 @@ const business = computed(() => store.business);
       <h2 class="text-center text-2xl font-extrabold">
         Edit your business listing
       </h2>
-      <BusinessComponent v-if=business />
-      <BusinessCardComponent :business=business class="mb-6"/>
+      <BusinessFormComponent />
+      <BusinessCardComponent v-if="business" :business=business class="mb-6"/>
     </div>
   </div>
 </div>
