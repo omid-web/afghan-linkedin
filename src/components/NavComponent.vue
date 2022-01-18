@@ -5,7 +5,7 @@ import {
 } from '@headlessui/vue';
 import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 import logoUrl from '/AF.svg';
-import userUrl from '/user.png';
+import photoURL from '/user.png';
 
 const auth = authStore();
 const navigation = [
@@ -14,9 +14,16 @@ const navigation = [
   { name: 'Businesses', href: 'directory', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
-const logged = computed(() => auth.logged);
-const photoURL = computed(() => auth.user?.photoURL);
+const { logged, user } = storeToRefs(auth);
 const logout = () => auth.logout;
+let getPhotoUrl = photoURL;
+watch(user, () => {
+  if (user.value && user.value.photoURL) {
+    getPhotoUrl = user.value.photoURL;
+  }
+}, {
+  immediate: true,
+});
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
@@ -55,7 +62,7 @@ const logout = () => auth.logout;
           <div>
             <MenuButton class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" :src=photoURL />
+              <img class="h-8 w-8 rounded-full" :src=getPhotoUrl />
             </MenuButton>
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
@@ -94,6 +101,6 @@ nav {
   @apply shadow-lg;
   @apply top-0;
 
-  z-index: 20;
+  z-index: 10;
 }
 </style>

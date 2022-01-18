@@ -11,9 +11,13 @@ import {
 } from 'firebase/auth';
 import { auth } from '@services/firebase';
 import { AuthState } from '@interfaces/auth';
-import { useLoading } from '@/loading';
+import { LoadingBar } from 'quasar'
 
-const loading = useLoading();
+LoadingBar.setDefaults({
+  color: 'red',
+  size: '3px',
+  position: 'top'
+});
 
 const authStore = defineStore('auth', {
   state: () => {

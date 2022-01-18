@@ -13,9 +13,14 @@ import {
 import authStore from '@store/auth';
 import { db } from '@services/firebase';
 import { BusinessState, Business } from '@interfaces/business';
-import { useLoading } from '@/loading';
+import { LoadingBar } from 'quasar'
 
-const loading = useLoading();
+LoadingBar.setDefaults({
+  color: 'red',
+  size: '3px',
+  position: 'top'
+});
+
 const auth = authStore();
 
 const businessStore = defineStore('businessStore', {

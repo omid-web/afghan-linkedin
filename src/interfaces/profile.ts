@@ -1,5 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
-
 interface Profile {
   displayName: string,
   email: string,
@@ -12,7 +10,7 @@ interface Profile {
   facebook: string,
   twitter: string,
   instagram: string,
-  createdAt: Timestamp,
+  createdAt: any,
 };
 
 interface ProfileState {

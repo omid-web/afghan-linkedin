@@ -14,10 +14,14 @@ import {
 import authStore from '@store/auth';
 import { db } from '@services/firebase';
 import linkedinService from '@services/linkedin';
-import { ProfileState, Profile } from '@/interfaces/profile';
-import { useLoading } from '@/loading';
+import { ProfileState, Profile } from '@interfaces/profile';
+import { LoadingBar } from 'quasar'
 
-const loading = useLoading();
+LoadingBar.setDefaults({
+  color: 'red',
+  size: '3px',
+  position: 'top'
+});
 
 const profileStore = defineStore('profileStore', {
   state: () => {
@@ -76,6 +80,7 @@ const profileStore = defineStore('profileStore', {
     async setProfile() {
       try {
         this.loading = true;
+        // LoadingBar.start()
         const auth = authStore();
         const docRef = doc(db, `users`, `${auth.user?.uid}`)
         const docSnap = await getDoc(docRef);
@@ -98,6 +103,7 @@ const profileStore = defineStore('profileStore', {
         }
       } finally {
         this.loading = false;
+        // LoadingBar.stop();
       }
     },
     async setProfiles() {
