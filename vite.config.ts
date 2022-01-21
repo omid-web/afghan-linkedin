@@ -5,7 +5,6 @@ import Components from 'unplugin-vue-components/vite';
 import Pages from 'vite-plugin-pages';
 import Layouts from 'vite-plugin-vue-layouts';
 import { ViteAliases } from 'vite-aliases';
-import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,12 +13,7 @@ export default defineConfig({
     'LINKEDIN_',
   ],
   plugins: [
-    vue({
-      template: { transformAssetUrls }
-    }),
-    quasar({
-      sassVariables: 'src/quasar-variables.sass'
-    }),
+    vue({}),
     Pages({
       nuxtStyle: true
     }),

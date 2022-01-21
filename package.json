@@ -16,7 +16,6 @@
   "devDependencies": {
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.5",
-    "@quasar/vite-plugin": "^1.0.4",
     "@types/node": "^16.11.12",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",

@@ -582,11 +582,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@quasar/vite-plugin@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@quasar/vite-plugin/-/vite-plugin-1.0.4.tgz#7a9e6869f59c25830b66d3e4f04e8ab4706aa41a"
-  integrity sha512-rH3QKL1p1bvAki62m2Jovh4I84iQifcPSMverzvMxjzKAqRhaxcDqBwJLC5WxnzJ8DWy/rAPI7pQAWlImG7Q7Q==
-
 "@rollup/pluginutils@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.1.1.tgz#1d4da86dd4eded15656a57d933fda2b9a08d47ec"
