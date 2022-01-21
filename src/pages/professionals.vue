@@ -5,7 +5,7 @@ import profileStore from '@/store/profile';
 const industry = ref('');
 
 const auth = authStore();
-const { logged } = storeToRefs(auth);
+const { getLogged } = storeToRefs(auth);
 
 const store = profileStore();
 store.setProfiles();
@@ -40,7 +40,7 @@ const filteredProfiles = computed(() => {
   </div>
 
   <div class="fixed right-4 bottom-4">
-    <a v-if="logged" href="profile"
+    <a v-if="getLogged" href="profile"
       class="flex justify-center items-center p-0 w-16 h-16 bg-green-600 rounded-full hover:bg-green-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
       <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
         <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601

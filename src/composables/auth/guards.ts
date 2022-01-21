@@ -15,7 +15,7 @@ const useAuthGuard = (
   namedRoute: string,
 ) => {
   const auth = authStore();
-  const { logged } = toRefs(auth);
+  const { getLogged } = storeToRefs(auth);
   const { push } = useRouter();
 
   const checkAuth = (
@@ -26,8 +26,8 @@ const useAuthGuard = (
     }
   };
 
-  watch(logged, () => {
-    checkAuth(logged.value);
+  watch(getLogged, () => {
+    checkAuth(getLogged.value);
   }, {
     immediate: true,
   });

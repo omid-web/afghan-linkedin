@@ -5,7 +5,6 @@ const store = profileStore();
 const url = window.location.href;
 // @ts-ignore
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)=(\S*)/)[1] : '';
-console.log('%cprofile.vue line:8 code', 'color: #007acc;', code);
 if (code !== '') {
   store.initalizeProfile(code);
 } else {

@@ -1,4 +1,4 @@
-# Vue 3 Template
+# Yellow pages for fghan professionals and businesses
 
 ## TODO
 

@@ -14,7 +14,7 @@ const navigation = [
   { name: 'Businesses', href: 'directory', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
-const { logged, user } = storeToRefs(auth);
+const { getLogged, user } = toRefs(auth);
 const logout = () => auth.logout;
 let getPhotoUrl = photoURL;
 watch(user, () => {
@@ -52,11 +52,11 @@ watch(user, () => {
         </div>
       </div>
 
-      <div v-if="!logged" class="absolute inset-y-0 right-0 flex items-center pr-2">
+      <div v-if="!getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2">
         <router-link to="sign-in" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</router-link>
       </div>
 
-      <div v-if="logged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div v-if="getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <!-- Profile dropdown -->
         <Menu as="div" class="ml-3 relative">
           <div>

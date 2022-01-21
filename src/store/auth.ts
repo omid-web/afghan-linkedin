@@ -6,18 +6,13 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
-  User,
   AuthProvider,
 } from 'firebase/auth';
 import { auth } from '@services/firebase';
 import { AuthState } from '@interfaces/auth';
-import { LoadingBar } from 'quasar'
+import { useLoading } from '@/loading';
 
-LoadingBar.setDefaults({
-  color: 'red',
-  size: '3px',
-  position: 'top'
-});
+const loading = useLoading();
 
 const authStore = defineStore('auth', {
   state: () => {
@@ -28,15 +23,9 @@ const authStore = defineStore('auth', {
     return state;
   },
   getters: {
-    getUser(state): User | null {
-      return state.user;
-    },
-    logged(state) : boolean {
-      return Boolean(state.user);
-    },
-    loadingStatus(state) : boolean {
-      return state.loading;
-    },
+    getUser: (state) => state.user,
+    getLogged: (state) => Boolean(state.user),
+    getLoading: (state) => state.loading,
   },
   actions: {
     init() {
@@ -87,9 +76,12 @@ const authStore = defineStore('auth', {
       }
     },
     async logout() {
-      this.loading = true;
-      await signOut(auth);
-      this.loading = false;
+      try{
+        this.loading = true;
+        await signOut(auth);
+      } finally {
+        this.loading = false;
+      }
     },
   },
   persist: {

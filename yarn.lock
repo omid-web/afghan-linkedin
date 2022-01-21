@@ -582,11 +582,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@quasar/extras@^1.12.4":
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.12.4.tgz#6058b8cc71d8f1b4444c6a9ba7bca392171f7af3"
-  integrity sha512-a5yIWDzuhH9mwB+TnJs70gLjydUjxzxyGk0MuXfgdXNOVcb5qhZhuPvPx7JrUCQn5N3Jh0cO3+KA4CKCwcpYug==
-
 "@quasar/vite-plugin@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@quasar/vite-plugin/-/vite-plugin-1.0.4.tgz#7a9e6869f59c25830b66d3e4f04e8ab4706aa41a"
@@ -3250,11 +3245,6 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
-
-quasar@^2.4.10:
-  version "2.4.10"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.4.10.tgz#d04ea753b0100ad2932a2dbaeb4d893154c717b8"
-  integrity sha512-fYd3VwUqtAyRBAbL+4CnadjFjyFJtMIeIOjeQzvycSdPqsv30WtVjz6SYIN53mZ7lFY0xfvnvHCfeVRPEl1FYw==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
