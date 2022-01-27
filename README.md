@@ -1,8 +1,7 @@
-# Vue 3 Template
+# A Yellowpage site for Afghans
 
 ## TODO
 
-- improve the homepage, more informative and prettier
 - add share buttons to the proffesional and business cards.
 - add skeleton to loading pages
 - add notification toast after user adds/edits their information
@@ -16,8 +15,6 @@ Only registered users can add a limit of 1 professional and 1 business, they can
 Main pages are:
 - Professional
 - Businesses directory
-- Ideas
-- Chat (only displays last 100 messages)
 - Profile (logged in user can edit their proffesional card)
 - Business (logged in user can edit their business card)
 
