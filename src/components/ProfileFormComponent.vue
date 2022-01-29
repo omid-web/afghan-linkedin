@@ -1,68 +1,39 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
+import { Timestamp } from 'firebase/firestore';
+import profileStore from '@store/profile';
 
-const props = defineProps<{
-  user?: any,
-}>();
-
-const {
-  displayName,
-  email,
-  jobTitle,
-  industry,
-  whoCanContact,
-  bio,
-  profilePic,
-  linkedin,
-  facebook,
-  twitter,
-  instagram,
-} = toRefs(props.user);
+const store = profileStore();
+const { profile } = toRefs(store);
 
 const updateProfile = () => {
-  fireStore.dispatch(
-    'updateLinkedin',
-    {
-      displayName: displayName.value,
-      email: email.value,
-      jobTitle: jobTitle.value,
-      industry: industry.value,
-      whoCanContact: whoCanContact.value,
-      bio: bio.value,
-      profilePic: profilePic.value,
-      linkedin: linkedin.value,
-      facebook: facebook.value,
-      twitter: twitter.value,
-      instagram: instagram.value,
-    },
-  );
+  store.updateProfile(profile.value);
 };
 </script>
 
 <template>
-<form class="pb-8 space-y-6" @submit.prevent="updateProfile">
+<form class="pb-8 space-y-6" @submit.prevent=updateProfile>
   <div class="rounded-md shadow-sm space-y-3">
     <div>
       <label for="full-name">Full name</label>
-      <input id="full-name" v-model="displayName" type="text" required
+      <input id="full-name" v-model="profile.displayName" type="text" required
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
     <div>
       <label for="email-address">Email address</label>
-      <input id="email-address" v-model="email" type="email" autocomplete="email" required
+      <input id="email-address" v-model="profile.email" type="email" autocomplete="email" required
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
     <div>
       <label for="jobTitle">Job Title</label>
-      <input id="jobTitle" v-model="jobTitle" type="text"
+      <input id="jobTitle" v-model="profile.jobTitle" type="text"
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
     </div>
     <div>
       <label for="industry">Select an industry</label>
-      <select id="industry" v-model="industry" name="industry"
+      <select id="industry" v-model="profile.industry" name="industry"
         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
         rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm">
         <option value="" selected disabled hidden>Pick One</option>
@@ -79,30 +50,30 @@ const updateProfile = () => {
   <div>
     <label for="bio">Bio</label>
     <textarea
-      id="bio" v-model="bio" name="bio" rows="3"
+      id="bio" v-model="profile.bio" name="bio" rows="3"
       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
       rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
       type="text"
-      :placeholder="'Tell us about yourself, ' + [[ displayName ]]"
+      :placeholder="'Tell us about yourself, ' + [[ profile.displayName ]]"
     />
   </div>
   <div name="socials">
     <div>Socials</div>
     <span class="flex">
       https://linkedin.com/in/
-      <input id="linkedin" v-model="linkedin" type="text" placeholder="linkedin-handle" class="text-gray-900 flex-1" />
+      <input id="linkedin" v-model="profile.linkedin" type="text" placeholder="linkedin-handle" class="text-gray-900 flex-1" />
     </span>
     <span class="flex">
       https://facebook.com/
-      <input id="facebook" v-model="facebook" type="text" placeholder="facebook-handle" class="text-gray-900 flex-1" />
+      <input id="facebook" v-model="profile.facebook" type="text" placeholder="facebook-handle" class="text-gray-900 flex-1" />
     </span>
     <span class="flex">
       https://twitter.com/
-      <input id="twitter" v-model="twitter" type="text" placeholder="twitter-handle" class="text-gray-900 flex-1"/>
+      <input id="twitter" v-model="profile.twitter" type="text" placeholder="twitter-handle" class="text-gray-900 flex-1"/>
     </span>
     <span class="flex">
       https://instagram.com/
-      <input id="instagram" v-model="instagram" type="text" placeholder="instagram-handle" class="text-gray-900 flex-1"/>
+      <input id="instagram" v-model="profile.instagram" type="text" placeholder="instagram-handle" class="text-gray-900 flex-1"/>
     </span>
   </div>
   <button type="submit"

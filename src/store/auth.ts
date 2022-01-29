@@ -1,5 +1,3 @@
-import { createStore } from "vuex";
-import createPersistedState from "vuex-persistedstate";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
@@ -8,102 +6,92 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   updateProfile,
+  AuthProvider,
 } from 'firebase/auth';
-import { auth } from '@/services/firebase';
-import fireStore from '@store/fire';
-import { AuthState } from '@/types';
-import { useLoading } from '@/loading'
+import { auth } from '@services/firebase';
+import { AuthState } from '@interfaces/auth';
+import { useLoading } from '@/loading';
 
 const loading = useLoading();
 
-const authStore = createStore({
+const authStore = defineStore('auth', {
   state: () => {
     const state: AuthState = {
       user: null,
-      loading: false
+      loading: false,
     };
     return state;
   },
   getters: {
-    getUser(state) {
-      return state.user;
-    },
-    logged(state) : boolean {
-      return Boolean(state.user);
-    },
-  },
-  mutations: {
-    setUser: (state, user) => state.user = user,
+    getUser: (state) => state.user,
+    getLogged: (state) => Boolean(state.user),
+    getLoading: (state) => state.loading,
   },
   actions: {
-    init({ commit }) {
+    init() {
       return new Promise((resolve) => {
         onAuthStateChanged(auth, (updatedUser) => {
+          this.loading = false;
           if (updatedUser) {
-            fireStore.dispatch('setUser', updatedUser);
-            commit('setUser', updatedUser);
+            this.user = updatedUser;
+            resolve(updatedUser);
           } else {
-            fireStore.dispatch("resetState");
-            commit('setUser', null);
+            this.user = null;
             resolve(null);
-          };
+          }
         });
       });
     },
-    async register({ commit }, { displayName, email, password }) {
-      loading.start();
-      await createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        const user = res.user;
-        if (user) {
-          this.state.user = user;
-          updateProfile(user, {
-            displayName: displayName
-          }).then(() => {
-            fireStore.dispatch('registerUser', user)
-          })
-        }
-      })
-      .catch((err) => {
-        alert(err.code + err.message);
-      })
-      loading.end();
-    },
-    async login({ commit }, { email, password }) {
-      loading.start();
-      await signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        if (res.user) {
-          this.state.user = res.user;
-          fireStore.dispatch('getLinkedin');
-        } else {
-          this.state.user = null;
-        }
-      })
-      .catch((err) => {
-        alert(err.code + err.message);
-      })
-      loading.end();
-    },
     async signInWithGoogle() {
       const provider = new GoogleAuthProvider();
+      await this.loginWithRedirect(provider);
+    },
+    async loginWithRedirect(provider: AuthProvider) {
       try {
-        loading.start();
-        await signInWithRedirect(auth, provider)
+        this.loading = true;
+        await signInWithRedirect(auth, provider);
       } finally {
-        loading.end();
+        this.loading = false;
+      }
+    },
+    async register(displayName: string, email: string, password: string) {
+      try {
+        this.loading = true;
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        if (res.user) {
+          updateProfile(res.user, {
+            displayName: displayName
+          });
+        }
+      } finally {
+        this.loading = false;
+      }
+    },
+    async loginWithEmailAndPassword(email: string, password: string) {
+      try {
+        this.loading = true;
+        await signInWithEmailAndPassword(auth, email, password);
+      } finally {
+        this.loading = false;
       }
     },
     async logout() {
-      await signOut(auth)
-      .then(() => {})
-      .catch((err) => {
-        alert(err.code + err.message);
-      });
+      try{
+        this.loading = true;
+        await signOut(auth);
+      } finally {
+        this.loading = false;
+      }
     },
   },
-  modules: {},
-  plugins: [createPersistedState()],
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        storage: sessionStorage,
+      },
+    ],
+  },
 });
 
 export default authStore;

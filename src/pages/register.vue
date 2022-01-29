@@ -5,12 +5,9 @@ const displayName = ref('');
 const email = ref('');
 const password = ref('');
 
+const auth = authStore();
 const register = () => {
-  authStore.dispatch('register', {
-    displayName: displayName.value,
-    email: email.value,
-    password: password.value,
-  });
+  auth.register(displayName.value, email.value, password.value);
 };
 </script>
 
@@ -22,7 +19,7 @@ const register = () => {
         Sign up for an account
       </h2>
     </div>
-    <form class="mt-8 space-y-6" @submit.prevent="register">
+    <form class="mt-8 space-y-6" @submit.prevent=register>
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

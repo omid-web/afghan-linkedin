@@ -1,4 +1,5 @@
-# A Yellowpage site for Afghans
+# Yellow pages for fghan professionals and businesses
+
 
 ## TODO
 

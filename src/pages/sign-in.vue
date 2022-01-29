@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
 
-const email = ref(authStore.state.user?.email);
+const email = ref('');
 const password = ref('');
 
-const signIn = () => {
-  authStore.dispatch('login', {
-    email: email.value,
-    password: password.value,
-  });
-};
+const auth = authStore();
+const signIn = () => auth.loginWithEmailAndPassword(email.value, password.value);
 </script>
 
 <template>
@@ -24,18 +20,18 @@ const signIn = () => {
         <router-link to="register" class="underline hover:no-underline hover:text-white">Register</router-link>
       </h4>
     </div>
-    <form class="mt-8 space-y-6" @submit.prevent="signIn">
+    <form class="mt-8 space-y-6" @submit.prevent=signIn>
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <label for="email-address" class="sr-only">Email address</label>
-          <input id="email-address" v-model="email" type="email" autocomplete="email" required
+          <input id="email-address" v-model=email type="email" autocomplete="email" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address">
         </div>
         <div>
           <label for="password" class="sr-only">Password</label>
-          <input id="password" v-model="password" type="password" autocomplete="current-password" required
+          <input id="password" v-model=password type="password" autocomplete="current-password" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
             rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password">
         </div>

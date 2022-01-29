@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
+import profileStore from '@store/profile';
 
+const store = profileStore();
 const url = window.location.href;
 // @ts-ignore
 const code = url.indexOf('code') > 1 ? url.match(/(?:\?code)=(\S*)/)[1] : '';
 if (code !== '') {
-  fireStore.dispatch('setLinkedin', code);
+  store.initalizeProfile(code);
 } else {
-  fireStore.dispatch('getLinkedin');
+  store.setProfile();
 }
-
-const user = computed(() => fireStore.getters.getLinkedinUser);
+const { profile } = storeToRefs(store);
 </script>
 
 <template>
 <div class="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
-    <div v-if=user>
+    <div v-if="profile">
       <h2 class="text-center text-2xl font-extrabold">
         Edit your contact card
       </h2>
-      <ProfileComponent :user=user />
-      <UserCardComponent :user=user class="mb-6"/>
+      <ProfileFormComponent />
+      <ProfileCardComponent :profile=profile class="mb-6"/>
     </div>
 
     <div v-else>

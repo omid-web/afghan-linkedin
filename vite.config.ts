@@ -13,7 +13,7 @@ export default defineConfig({
     'LINKEDIN_',
   ],
   plugins: [
-    vue(),
+    vue({}),
     Pages({
       nuxtStyle: true
     }),
@@ -30,6 +30,7 @@ export default defineConfig({
       imports: [
         'vue',
         'vue-router',
+        'pinia',
       ],
     }),
   ]

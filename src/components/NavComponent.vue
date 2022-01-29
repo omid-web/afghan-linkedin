@@ -5,33 +5,25 @@ import {
 } from '@headlessui/vue';
 import { MenuIcon, XIcon } from '@heroicons/vue/outline';
 import logoUrl from '/AF.svg';
-import userUrl from '/user.png';
+import photoURL from '/user.png';
 
-const navigationNotLogged = [
+const auth = authStore();
+const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Business Directory', href: 'directory', current: false },
-];
-const navigationLogged = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Business Directory', href: 'directory', current: false },
-  // { name: 'Chat', href: 'chat', current: false },
-  // { name: 'Ideas', href: 'ideas', current: false },
+  { name: 'Businesses', href: 'directory', current: false },
 ];
 const item = { name: 'Home', href: '/', current: false };
-
-const logged = computed(() => authStore.getters.logged);
-const photoURL = computed(() => {
-  if (!('user' in authStore.state) || !authStore.state.user?.photoURL) {
-    return userUrl;
+const { getLogged, user } = toRefs(auth);
+const logout = () => auth.logout;
+let getPhotoUrl = photoURL;
+watch(user, () => {
+  if (user.value && user.value.photoURL) {
+    getPhotoUrl = user.value.photoURL;
   }
-  return authStore.state.user?.photoURL;
+}, {
+  immediate: true,
 });
-
-function logout() {
-  authStore.dispatch('logout');
-}
 </script>
 
 <!-- This example requires Tailwind CSS v2.0+ -->
@@ -52,30 +44,25 @@ function logout() {
           <img class="block h-8 w-auto" :src=logoUrl alt="Logo" />
         </div>
         <div class="hidden sm:block sm:ml-6">
-          <div v-if=!logged class="flex space-x-4">
-            <a v-for="item in navigationNotLogged" :key="item.name" :href="item.href"
-              :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
-              :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-          </div>
-          <div v-if=logged class="flex space-x-4">
-            <a v-for="item in navigationLogged" :key="item.name" :href="item.href"
+          <div class="flex space-x-4">
+            <a v-for="item in navigation" :key="item.name" :href="item.href"
               :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
               :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
           </div>
         </div>
       </div>
 
-      <div v-if="!logged" class="absolute inset-y-0 right-0 flex items-center pr-2">
+      <div v-if="!getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2">
         <router-link to="sign-in" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</router-link>
       </div>
 
-      <div v-if="logged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div v-if="getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <!-- Profile dropdown -->
         <Menu as="div" class="ml-3 relative">
           <div>
             <MenuButton class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
               <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" :src=photoURL />
+              <img class="h-8 w-8 rounded-full" :src=getPhotoUrl />
             </MenuButton>
           </div>
           <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
@@ -88,7 +75,7 @@ function logout() {
                 <a href="business" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Business</a>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <a @click="logout" href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
+                <a @click=logout href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
               </MenuItem>
             </MenuItems>
           </transition>
@@ -98,13 +85,8 @@ function logout() {
   </div>
 
   <DisclosurePanel class="sm:hidden">
-    <div v-if=!logged class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigationNotLogged" :key="item.name" as="a" :href="item.href"
-        :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
-        :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
-    </div>
-    <div v-if=logged class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigationLogged" :key="item.name" as="a" :href="item.href"
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
         :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
         :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
     </div>
@@ -119,6 +101,6 @@ nav {
   @apply shadow-lg;
   @apply top-0;
 
-  z-index: 20;
+  z-index: 10;
 }
 </style>

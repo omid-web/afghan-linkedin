@@ -41,6 +41,9 @@
             ],
             "@composables/*": [
                 "./src/composables/*"
+            ],
+            "@interfaces/*": [
+                "./src/interfaces/*"
             ]
         }
     },

@@ -1,47 +1,45 @@
 <script setup lang="ts">
-import fireStore from '@/store/fire';
-
 const props = defineProps<{
-  user?: any,
+  profile?: any,
 }>();
 
-const loggedUser = fireStore.getters.getUser || null;
-const linkedin = `https://linkedin.com/in/${props.user.linkedin}`;
-const facebook = `https://facebook.com/${props.user.facebook}`;
-const twitter = `https://twitter.com/${props.user.twitter}`;
-const instagram = `https://instagram.com/${props.user.instagram}`;
+const loggedprofile = {};
+const linkedin = `https://linkedin.com/in/${props.profile.linkedin}`;
+const facebook = `https://facebook.com/${props.profile.facebook}`;
+const twitter = `https://twitter.com/${props.profile.twitter}`;
+const instagram = `https://instagram.com/${props.profile.instagram}`;
 
 const emailLink = `
-mailto:${props.user.email}?
+mailto:${props.profile.email}?
 bcc=afghan.tech.bro@gmail.com&
 subject=afghan-linkedin.com%3A%20Let's%20connect%20&
-body=Hi ${props.user.displayName},%0D%0D
+body=Hi ${props.profile.displayName},%0D%0D
 I am interested in collabrating with you. Can we talk?%0D%0D
-Regards, ${loggedUser?.displayName}`;
+Regards, ${loggedprofile}`;
 </script>
 
 <template>
   <div class="bg-white rounded-lg p-6 text-gray-700">
     <div class="flex">
       <img class="h-20 w-20 rounded mr-4"
-      :src="user?.profilePic">
+      :src="profile?.profilePic">
       <div class="text-left">
-        <h2 class="text-lg text-gray-900">{{ user.displayName }}</h2>
-        <div>{{ user.jobTitle }}</div>
-        <div>{{ user.industry }}</div>
+        <h2 class="text-lg text-gray-900">{{ profile.displayName }}</h2>
+        <div>{{ profile.jobTitle }}</div>
+        <div>{{ profile.industry }}</div>
       </div>
     </div>
     <div class="py-2">
-      {{ user.bio }}
+      {{ profile.bio }}
     </div>
     <div class="flex">
       <form :action=emailLink method="post">
         <button type="submit" class="email">Email</button>
       </form>
-      <a :href=linkedin target="_blank" :class='["fa fa-linkedin", !props.user.linkedin && "opacity-40 pointer-events-none"]' />
-      <a :href=facebook target="_blank" :class='["fa fa-facebook", !props.user.facebook && "opacity-40 pointer-events-none"]' />
-      <a :href=twitter target="_blank" :class='["fa fa-twitter", !props.user.twitter && "opacity-40 pointer-events-none"]' />
-      <a :href=instagram target="_blank" :class='["fa fa-instagram", !props.user.instagram && "opacity-40 pointer-events-none"]' />
+      <a :href=linkedin target="_blank" :class='["fa fa-linkedin", !props.profile.linkedin && "opacity-40 pointer-events-none"]' />
+      <a :href=facebook target="_blank" :class='["fa fa-facebook", !props.profile.facebook && "opacity-40 pointer-events-none"]' />
+      <a :href=twitter target="_blank" :class='["fa fa-twitter", !props.profile.twitter && "opacity-40 pointer-events-none"]' />
+      <a :href=instagram target="_blank" :class='["fa fa-instagram", !props.profile.instagram && "opacity-40 pointer-events-none"]' />
     </div>
   </div>
 </template>
