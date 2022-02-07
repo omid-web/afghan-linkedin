@@ -60,4 +60,6 @@ export default {
 
 <route lang="yaml">
 name: 'professionals'
+meta:
+  layout: 'user'
 </route>

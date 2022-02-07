@@ -105,6 +105,7 @@ const profileStore = defineStore('profileStore', {
     async setProfiles() {
       try {
         this.loading = true;
+        loading.start();
         let profiles: Profile[] = [];
         const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
@@ -129,6 +130,7 @@ const profileStore = defineStore('profileStore', {
         this.profiles = profiles;
       } finally {
         this.loading = false;
+        loading.end();
       }
     },
     async updateProfile(profile: Profile) {

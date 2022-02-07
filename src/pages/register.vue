@@ -70,6 +70,4 @@ export default {
 
 <route lang="yaml">
 name: 'register'
-meta:
-  layout: 'unauthenticated'
 </route>

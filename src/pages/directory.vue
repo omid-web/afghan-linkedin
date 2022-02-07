@@ -58,4 +58,6 @@ export default {
 
 <route lang="yaml">
 name: 'directory'
+meta:
+  layout: 'user'
 </route>

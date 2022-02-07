@@ -7,8 +7,8 @@ useAuth();
 </script>
 
 <template>
-<NavComponent />
-<router-view class="mt-20"/>
+<!-- <NavComponent /> -->
+<router-view />
 </template>
 
 <script lang="ts">
@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
 /* moved css from root nprogress.css file to here, due to a build error */
 /* Make clicks pass-through */
 #nprogress {

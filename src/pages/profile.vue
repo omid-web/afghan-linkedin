@@ -39,6 +39,4 @@ export default {
 
 <route lang="yaml">
 name: 'profile'
-meta:
-  layout: 'user'
 </route>

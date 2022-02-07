@@ -28,6 +28,4 @@ export default {
 
 <route lang="yaml">
 name: 'business'
-meta:
-  layout: 'user'
 </route>

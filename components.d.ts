@@ -6,12 +6,15 @@ declare module 'vue' {
   export interface GlobalComponents {
     BusinessCardComponent: typeof import('./src/components/BusinessCardComponent.vue')['default']
     BusinessFormComponent: typeof import('./src/components/BusinessFormComponent.vue')['default']
+    FeedComponent: typeof import('./src/components/FeedComponent.vue')['default']
     IndustryOptionsComponent: typeof import('./src/components/IndustryOptionsComponent.vue')['default']
     LinkedinButtonComponent: typeof import('./src/components/LinkedinButtonComponent.vue')['default']
     NavComponent: typeof import('./src/components/NavComponent.vue')['default']
     ProfileCardComponent: typeof import('./src/components/ProfileCardComponent.vue')['default']
     ProfileFormComponent: typeof import('./src/components/ProfileFormComponent.vue')['default']
+    SidebarComponent: typeof import('./src/components/SidebarComponent.vue')['default']
     SignInComponent: typeof import('./src/components/SignInComponent.vue')['default']
+    WidgetsComponent: typeof import('./src/components/WidgetsComponent.vue')['default']
   }
 }
 
