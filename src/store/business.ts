@@ -23,7 +23,7 @@ const businessStore = defineStore('businessStore', {
   state: () => {
     const state: BusinessState = {
       business: {
-        displayName: 'business',
+        displayName: '',
         website: '',
         location: '',
         email: '',

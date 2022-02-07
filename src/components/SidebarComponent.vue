@@ -6,7 +6,7 @@ const props = defineProps<{
 
 <template>
 <div class="space-y-2 min-w-max max-w-lg">
-  <div onclick="location.href='profile';" class="bg-white dark:bg-[#1D2226] rounded-lg overflow-hidden relative flex flex-col items-center text-center border border-gray-300 dark:border-none">
+  <div class="bg-white dark:bg-[#1D2226] rounded-lg overflow-hidden relative flex flex-col items-center text-center border border-gray-300 dark:border-none">
     <!-- <div class="w-1/2 h-14">
       <div class="relative w-1/2 h-full">
         <img src="https://rb.gy/i26zak" alt="">

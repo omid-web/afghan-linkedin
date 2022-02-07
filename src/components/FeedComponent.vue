@@ -33,7 +33,7 @@ const sendPost = () => {
             v-model="postInput"
           />
           <button type="submit"
-            class="text-sm mt-10 ml-4 px-2 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            class="text-sm mt-20 ml-4 px-2 h-12 rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
             Post Update
           </button>
         </form>
@@ -57,7 +57,7 @@ const sendPost = () => {
     </div>
   </div>
 
-  <div v-for="post in getPosts" class="bg-white dark:bg-[#1D2226] rounded-lg border border-gray-300 dark:border-none" :key="post.createdAt">
+  <div v-for="post in getPosts" class="bg-white dark:bg-[#1D2226] rounded-lg border border-gray-300 dark:border-none">
     <div class="flex items-center px-2.5 cursor-pointer">
       <img :src="post?.userPhotoURL" class="!h-10 !w-10 cursor-pointer" />
       <div class="mr-auto ml-2">
@@ -65,7 +65,7 @@ const sendPost = () => {
           {{ post.displayName }}
         </h6>
         <p class="text-sm dark:text-white/75 opacity-80">{{ post.email }}</p>
-        <div class="text-xs dark:text-white/75 opacity-80">{{ post.createdAt }} - {{ format(post.createdAt) }}</div>
+        <div class="text-xs dark:text-white/75 opacity-80">{{ post.createdAt }}</div>
       </div>
     </div>
 

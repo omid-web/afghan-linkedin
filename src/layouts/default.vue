@@ -6,7 +6,7 @@ useGuard(true, 'sign-in');
 
 <template>
 <div className="bg-[#F3F2EF] dark:bg-black dark:text-white h-screen overflow-y-scroll md:space-y-6">
-  <NavComponent />
+  <NavComponent class="mb-4" />
   <router-view />
 </div>
 </template>

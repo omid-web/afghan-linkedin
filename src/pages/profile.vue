@@ -16,7 +16,7 @@ const { profile } = storeToRefs(store);
 <template>
 <div class="min-h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
-    <div v-if="profile">
+    <div v-if=profile.email>
       <h2 class="text-center text-2xl font-extrabold">
         Edit your contact card
       </h2>

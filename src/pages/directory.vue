@@ -20,7 +20,7 @@ const filteredBusinesses = computed(() => {
 <template>
 <div class="min-h-full flex items-center justify-center px-4 pb-8 sm:px-6 lg:px-8">
   <div class="max-w-md w-full">
-    <div class="sticky top-16 z-20 bg-gray-700 pb-10">
+    <div class="pb-10">
       <h2 class="text-center text-2xl font-extrabold">
         Support & Follow
       </h2>

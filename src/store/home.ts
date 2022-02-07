@@ -50,6 +50,7 @@ const homeStore = defineStore('homeStore', {
         this.loading = true;
         const auth = authStore();
         console.log('%chome.ts line:52 aut.user', 'color: #007acc;', auth.user);
+        // @ts-ignore
         const { photoURL, uid, displayName, email } = auth.user;
         await addDoc(collection(db, "posts"), {
           email: email,

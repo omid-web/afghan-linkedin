@@ -23,7 +23,7 @@ const profileStore = defineStore('profileStore', {
   state: () => {
     const state: ProfileState = {
       profile: {
-        displayName: 'profile',
+        displayName: '',
         email: '',
         jobTitle: '',
         industry: '',
@@ -78,7 +78,7 @@ const profileStore = defineStore('profileStore', {
         this.loading = true;
         loading.start();
         const auth = authStore();
-        const docRef = doc(db, `users`, `${auth.user?.uid}`)
+        const docRef = doc(db, `users`, `${auth.user?.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData: Profile = {

@@ -3,7 +3,7 @@ import { Timestamp } from 'firebase/firestore';
 import profileStore from '@store/profile';
 
 const store = profileStore();
-const { profile } = toRefs(store);
+const { profile } = storeToRefs(store);
 
 const updateProfile = () => {
   store.updateProfile(profile.value);
