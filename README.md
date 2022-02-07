@@ -3,10 +3,11 @@
 
 ## TODO
 
-- add share buttons to the proffesional and business cards.
-- add skeleton to loading pages
-- add notification toast after user adds/edits their information
-- make site behave less janky when loggin for first time
+- [ ] when user logins, dont redirect back to signin then to homepage
+- [ ] add skeleton to loading pages
+- [ ] add notification toast after user adds/edits their information
+- [ ] add share buttons to the proffesional and business cards.
+
 
 ## About this project
 
@@ -14,6 +15,7 @@ A site where Afghans can find one another and support one another by adding them
 Only registered users can add a limit of 1 professional and 1 business, they can edit their profile from the top-right profile dropdown.
 
 Main pages are:
+- Home page, acts as feed, news sidebar
 - Professional
 - Businesses directory
 - Profile (logged in user can edit their proffesional card)
@@ -88,6 +90,8 @@ firebase login
 # After login just deploy
 firebase deploy
 ```
+
+Hosting URL: https://fir-ts-todo.web.app 
 
 
 

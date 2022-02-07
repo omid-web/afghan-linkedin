@@ -1,21 +1,13 @@
 <script setup lang="ts">
 import authStore from '@store/auth';
-import {
-  Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems,
-} from '@headlessui/vue';
-import { MenuIcon, XIcon } from '@heroicons/vue/outline';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { ChevronDownIcon } from '@heroicons/vue/solid';
 import logoUrl from '/AF.svg';
 import photoURL from '/user.png';
 
 const auth = authStore();
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Professionals', href: 'professionals', current: false },
-  { name: 'Businesses', href: 'directory', current: false },
-];
-const item = { name: 'Home', href: '/', current: false };
 const { getLogged, user } = toRefs(auth);
-const logout = () => auth.logout;
+const logout = () => auth.logout();
 let getPhotoUrl = photoURL;
 watch(user, () => {
   if (user.value && user.value.photoURL) {
@@ -28,70 +20,56 @@ watch(user, () => {
 
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-<Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <DisclosureButton class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-          <span class="sr-only">Open main menu</span>
-          <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-          <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
-        </DisclosureButton>
-      </div>
-      <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex-shrink-0 flex items-center">
-          <img class="block h-8 w-auto" :src=logoUrl alt="Logo" />
-        </div>
-        <div class="hidden sm:block sm:ml-6">
-          <div class="flex space-x-4">
-            <a v-for="item in navigation" :key="item.name" :href="item.href"
-              :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium']"
-              :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
-          </div>
-        </div>
+<header class="sticky top-0 z-40 bg-white dark:bg-[#1D2226] flex items-center justify-around py-1.5 px-3 focus-within:shadow-lg">
+  <a href="/" class="flex items-center space-x-2 w-full max-w-xs">
+    <img class="w-12 h-12" src="https://rb.gy/dpmd9s" alt="home">
+  </a>
+  <!-- <div className="flex items-center space-x-1 dark:md:bg-gray-700 py-2.5 px-4 rounded w-full">
+    <i class="fas fa-search"></i>
+    <input
+      type="text"
+      placeholder="Search"
+      className="hidden md:inline-flex bg-transparent text-sm focus:outline-none placeholder-black/70 dark:placeholder-white/75 flex-grow"
+    />
+  </div> -->
+
+  <div class="flex items-center space-x-6">
+    <a href="professionals" class="cursor-pointer flex flex-col justify-center items-center text-gray-500 hover:text-gray-700">
+      <i class="fas fa-users fa-lg" ></i>
+      <h4 class="text-sm ">Professionals</h4>
+    </a>
+    <a href="directory" class="cursor-pointer flex flex-col justify-center items-center text-gray-500 hover:text-gray-700">
+      <i class="fas fa-briefcase fa-lg"></i>
+      <h4 class="text-sm">Businesses</h4>
+    </a>
+
+    <Menu v-if="getLogged" as="div" class="relative inline-block text-left">
+      <div>
+        <MenuButton>
+          <span class="sr-only">Open user menu</span>
+          <img class="h-8 w-8 rounded-full" :src=getPhotoUrl />
+          <ChevronDownIcon class="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+        </MenuButton>
       </div>
 
-      <div v-if="!getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2">
-        <router-link to="sign-in" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sign In</router-link>
-      </div>
-
-      <div v-if="getLogged" class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <!-- Profile dropdown -->
-        <Menu as="div" class="ml-3 relative">
-          <div>
-            <MenuButton class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-              <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" :src=getPhotoUrl />
-            </MenuButton>
+      <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+        <MenuItems class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div class="py-1">
+            <MenuItem v-slot="{ active }">
+              <a href="profile" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">My Profile</a>
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <a href="business" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">My Business</a>
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <a @click="logout" href="/" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Sign Out</a>
+            </MenuItem>
           </div>
-          <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-            <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <MenuItem v-slot="{ active }">
-                <a href="profile" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Profile</a>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
-                <a href="business" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your Business</a>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
-                <a @click=logout href="/" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign Out</a>
-              </MenuItem>
-            </MenuItems>
-          </transition>
-        </Menu>
-      </div>
-    </div>
+        </MenuItems>
+      </transition>
+    </Menu>
   </div>
-
-  <DisclosurePanel class="sm:hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
-        :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium']"
-        :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
-    </div>
-  </DisclosurePanel>
-</Disclosure>
+</header>
 </template>
 
 <style scoped>

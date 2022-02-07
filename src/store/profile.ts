@@ -23,7 +23,7 @@ const profileStore = defineStore('profileStore', {
   state: () => {
     const state: ProfileState = {
       profile: {
-        displayName: 'profile',
+        displayName: '',
         email: '',
         jobTitle: '',
         industry: '',
@@ -78,7 +78,7 @@ const profileStore = defineStore('profileStore', {
         this.loading = true;
         loading.start();
         const auth = authStore();
-        const docRef = doc(db, `users`, `${auth.user?.uid}`)
+        const docRef = doc(db, `users`, `${auth.user?.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData: Profile = {
@@ -105,6 +105,7 @@ const profileStore = defineStore('profileStore', {
     async setProfiles() {
       try {
         this.loading = true;
+        loading.start();
         let profiles: Profile[] = [];
         const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
@@ -129,6 +130,7 @@ const profileStore = defineStore('profileStore', {
         this.profiles = profiles;
       } finally {
         this.loading = false;
+        loading.end();
       }
     },
     async updateProfile(profile: Profile) {

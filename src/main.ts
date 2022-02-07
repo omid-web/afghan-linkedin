@@ -2,6 +2,7 @@
 import { createApp } from 'vue'
 
 import './assets/index.css'
+import 'mdb-vue-ui-kit/css/mdb.min.css';
 
 // Router Imports
 import { createRouter, createWebHistory } from 'vue-router';

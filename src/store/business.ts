@@ -23,7 +23,7 @@ const businessStore = defineStore('businessStore', {
   state: () => {
     const state: BusinessState = {
       business: {
-        displayName: 'business',
+        displayName: '',
         website: '',
         location: '',
         email: '',
@@ -73,6 +73,7 @@ const businessStore = defineStore('businessStore', {
     async setBusinesses() {
       try {
         this.loading = true;
+        loading.start();
         let businesses: Business[] = [];
         const q = query(collection(db, "businesses"), orderBy("displayName", "desc"));
         const querySnapshot = await getDocs(q);
@@ -96,6 +97,7 @@ const businessStore = defineStore('businessStore', {
         this.businesses = businesses;
       } finally {
         this.loading = false;
+        loading.end();
       }
     },
     async updateBusiness(businessData: Business) {

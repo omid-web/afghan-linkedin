@@ -11,6 +11,7 @@ export default defineConfig({
   envPrefix: [
     'FIREBASE_',
     'LINKEDIN_',
+    'NEWS_'
   ],
   plugins: [
     vue({}),

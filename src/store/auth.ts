@@ -76,7 +76,8 @@ const authStore = defineStore('auth', {
       }
     },
     async logout() {
-      try{
+      try {
+        console.log('%cauth.ts line:8', 'color: #007acc;');
         this.loading = true;
         await signOut(auth);
       } finally {

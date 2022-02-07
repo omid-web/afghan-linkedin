@@ -21,7 +21,7 @@ const filteredProfiles = computed(() => {
 <template>
 <div class="min-h-full flex items-center justify-center px-4 pb-8 sm:px-6 lg:px-8">
   <div class="max-w-md w-full">
-    <div class="sticky top-16 z-20 bg-gray-700 pb-10">
+    <div class="top-16 pb-10">
       <h2 class="text-center text-2xl font-extrabold">
         Collaborate & Follow
       </h2>
@@ -60,4 +60,6 @@ export default {
 
 <route lang="yaml">
 name: 'professionals'
+meta:
+  layout: 'user'
 </route>
