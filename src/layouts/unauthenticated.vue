@@ -46,7 +46,7 @@ const signIn = () => auth.signInWithGoogle();
         </a>
       </div>
     </div>
-    <div class="relative xl:absolute w-80 h-80 xl:w-[650px] xl:h-[650px] top-14 right-5">
+    <div class="relative xl:absolute w-80 h-80 xl:w-[650px] xl:h-[650px] top-20 right-5">
       <img src="https://rb.gy/vkzpzt" alt="POC working">
     </div>
   </main>

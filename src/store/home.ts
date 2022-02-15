@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore';
 
 import authStore from '@store/auth';
-import newApiService from '@services/newsapi';
+import newsApiService from '@services/newsapi';
 import { db } from '@services/firebase';
 import { HomeState, Post, Article } from '@interfaces/home';
 import { useLoading } from '@/loading';
@@ -39,8 +39,9 @@ const homeStore = defineStore('homeStore', {
     async setArticles() {
       try {
         this.loading = true;
-        const articles = await newApiService.getTopNews()
-        this.articles = await articles.data.articles;
+        const articles = await newsApiService.getTopNews();
+        console.log('%chome.ts line:43 articles', 'color: #007acc;', articles);
+        this.articles = await articles.data.value;
       } finally {
         this.loading = false;
       }

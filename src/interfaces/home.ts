@@ -9,9 +9,13 @@ interface Post {
 }
 
 interface Article {
-  title: string,
-  url: string,
-  publishedAt: string
+  image: {
+    url: string
+  },
+  isBreakingNews: boolean,
+  name: string,
+  newsSearchUrl: string,
+  webSearchUrl: string
 }
 
 interface HomeState {
