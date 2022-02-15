@@ -4,17 +4,17 @@ const {
 } = import.meta.env;
 
 const apiClient = axios.create({
-  baseURL: "https://newsapi.org/v2",
-  withCredentials: false,
+  baseURL: "https://bing-news-search1.p.rapidapi.com",
+  params: {textFormat: 'Raw', safeSearch: 'Off'},
   headers: {
-    Accept: 'application/json',
-    'Content-Type': "application/json"
+    'x-bingapis-sdk': 'true',
+    'x-rapidapi-host': 'bing-news-search1.p.rapidapi.com',
+    'x-rapidapi-key': `${NEWS_API_KEY?.toString()}`
   }
 });
 
 export default {
   getTopNews() {
-    // returns top business new of canada
-    return apiClient.get(`/top-headlines?country=ca&category=business&apiKey=${NEWS_API_KEY?.toString()}`)
+    return apiClient.get(`/news/trendingtopics`)
   },
 }

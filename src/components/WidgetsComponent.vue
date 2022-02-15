@@ -6,6 +6,12 @@ import linkedinAd from '/linkedin-ad.jpeg';
 const store = homeStore();
 store.setArticles();
 const { getArticles } = storeToRefs(store);
+const openNews = (link: string) => {
+  window.open(
+    link,
+    '_blank',
+  );
+};
 </script>
 
 <template>
@@ -17,16 +23,13 @@ const { getArticles } = storeToRefs(store);
     </div>
 
     <div class="space-y-1">
-      <div v-for="article in getArticles" :key="article.url"
+      <div v-for="article in getArticles" :key="article.name"
         class="flex space-x-2 items-center cursor-pointer hover:bg-black/10 dark:hover:bg-black/20 px-2.5 py-1">
         <i class="fas fa-circle"></i>
         <div>
-          <h5 class="max-w-xs font-medium text-sm truncate pr-10">
-            {{ article.title }}
+          <h5 @click=openNews(article.newsSearchUrl) target="_blank" class="max-w-xs font-medium text-sm truncate pr-10">
+            {{ article.name }}
           </h5>
-          <div class="text-xs mt-0.5 dark:text-white/75 opacity-80">
-            {{ format(article.publishedAt) }}
-          </div>
         </div>
       </div>
     </div>
