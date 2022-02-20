@@ -30,7 +30,7 @@ const signIn = () => auth.signInWithGoogle();
     </div>
   </header>
 
-  <main class="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto">
+  <section class="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto">
     <div class="space-y-6 xl:space-y-10">
       <h1 class="text-3xl md:text-5xl text-amber-800/80 max-w-xl !leading-snug pl-4 xl:pl-0">
         Welcome to your Afghan professional community
@@ -49,7 +49,45 @@ const signIn = () => auth.signInWithGoogle();
     <div class="relative xl:absolute w-80 h-80 xl:w-[650px] xl:h-[650px] top-20 right-5">
       <img src="https://rb.gy/vkzpzt" alt="POC working">
     </div>
-  </main>
+  </section>
+
+  <section class="items-center max-w-screen-md mx-auto">
+    <h3>Problems</h3>
+    <p>
+      Newly arriving Afghans have either limited or no: <br>
+      - English language <br>
+      - Support network <br>
+      - Skills required for a suitable job <br>
+      - Lack of funds and/or job <br>
+      - Visibility of their business <br>
+    </p>
+
+    <h3>Solutions</h3>
+    <p>
+      Here are some ways this site presently and in the future can assist: <br>
+      - Connect individuals with a similar professional background <br>
+      - Help people find and support Afghan owned businesses <br>
+    </p>
+
+    <h3>Future Features</h3>
+    <p>
+      If theres enough interest, i.e. a couple thousand people signup, some possible features: <br>
+      - Add share button on the professional/business cards <br>
+      - Add a funding feature to the professional/business cards, where people can donate, and in turn they can provide services to the community <br>
+      - Add a job board, where businesses can post jobs and professionals can apply to said jobs <br>
+      - Add events page, where businesses and professionals can host networking events <br>
+    </p>
+
+    <h3>Monetization</h3>
+    <p>
+      Possible ways site can become self-sustaining in long-term (as its currently only maintained voluntarily by 1 person): <br>
+      - Add advertisment top and side banners <br>
+      - Establish affliate links from the professionals and businesses that register themselves on this site, like amazon links <br>
+      - Take a tiny commission from the planned donate feature, like indiegogo <br>
+    </p>
+
+    <h5 class="mb-4">Made by <a href="https://jemi.so/afghan" target="_blank">Afghan Tech Bro!</a></h5>
+  </section>
 </div>
 </template>
 
