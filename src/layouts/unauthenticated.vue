@@ -51,8 +51,8 @@ const signIn = () => auth.signInWithGoogle();
     </div>
   </section>
 
-  <section class="items-center max-w-screen-md mx-auto">
-    <h3>Problems</h3>
+  <section class="xl:flex-row items-center max-w-screen-lg mx-auto">
+    <h5>Problems</h5>
     <p>
       Newly arriving Afghans have either limited or no: <br>
       - English language <br>
@@ -62,14 +62,14 @@ const signIn = () => auth.signInWithGoogle();
       - Visibility of their business <br>
     </p>
 
-    <h3>Solutions</h3>
+    <h5>Solutions</h5>
     <p>
       Here are some ways this site presently and in the future can assist: <br>
       - Connect individuals with a similar professional background <br>
       - Help people find and support Afghan owned businesses <br>
     </p>
 
-    <h3>Future Features</h3>
+    <h5>Future Features</h5>
     <p>
       If theres enough interest, i.e. a couple thousand people signup, some possible features: <br>
       - Add share button on the professional/business cards <br>
@@ -78,7 +78,7 @@ const signIn = () => auth.signInWithGoogle();
       - Add events page, where businesses and professionals can host networking events <br>
     </p>
 
-    <h3>Monetization</h3>
+    <h5>Monetization</h5>
     <p>
       Possible ways site can become self-sustaining in long-term (as its currently only maintained voluntarily by 1 person): <br>
       - Add advertisment top and side banners <br>
@@ -86,7 +86,7 @@ const signIn = () => auth.signInWithGoogle();
       - Take a tiny commission from the planned donate feature, like indiegogo <br>
     </p>
 
-    <h5 class="mb-4">Made by <a href="https://jemi.so/afghan" target="_blank">Afghan Tech Bro!</a></h5>
+    <h6 class="mb-4">Made by <a href="https://jemi.so/afghan" target="_blank">Afghan Tech Bro!</a></h6>
   </section>
 </div>
 </template>
